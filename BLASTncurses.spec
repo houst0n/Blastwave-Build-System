@@ -69,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %ifarch amd64 sparcv9
 %ncurses_64.install -d %name-%version/%_arch64
-# 64-bit binaries are of no benefit
+mv $RPM_BUILD_ROOT%{_bindir}/%_arch64/* $RPM_BUILD_ROOT%{_bindir}/
 rm -rf $RPM_BUILD_ROOT%{_bindir}/%_arch64
 %endif
 

@@ -66,8 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %ifarch amd64 sparcv9
 %ncursesw_64.install -d %name-%version/%_arch64
-# 64-bit binaries are of no benefit
+# We don't need the ncursesw bins - they'll just conflict with ncurses
 rm -rf $RPM_BUILD_ROOT%{_bindir}/%_arch64
+rm -rf $RPM_BUILD_ROOT%{_bindir}
 %endif
 
 
@@ -76,8 +77,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr (-, root, bin)
-%dir %attr (0755, root, bin) %{_bindir}
-%{_bindir}/*
 %dir %attr (0755, root, bin) %{_libdir}
 %{_libdir}/*
 
