@@ -65,13 +65,14 @@ export LDFLAGS=
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%ncurses.install -d %name-%version/%{base_arch}
+
 %ifarch amd64 sparcv9
 %ncurses_64.install -d %name-%version/%_arch64
 # 64-bit binaries are of no benefit
 rm -rf $RPM_BUILD_ROOT%{_bindir}/%_arch64
 %endif
 
-%ncurses.install -d %name-%version/%{base_arch}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
