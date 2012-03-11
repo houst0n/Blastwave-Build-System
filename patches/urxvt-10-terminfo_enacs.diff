@@ -1,5 +1,0 @@
---- rxvt-unicode-9.06/doc/etc/rxvt-unicode.terminfo.orig	2009-03-14 21:55:47.000000000 +0100
-+++ rxvt-unicode-9.06/doc/etc/rxvt-unicode.terminfo	2009-03-14 21:58:20.749866268 +0100
-@@ -112 +112 @@
--	enacs=,
-+	enacs=\E[0@,

@@ -1,4 +1,0 @@
---- cairo-dock-2.3.0~3/CMakeLists.txt	2011-07-12 00:30:39.767478687 +0200
-+++ CMakeLists.txt	2011-07-12 00:30:25.912890610 +0200
-@@ -15 +14,0 @@
--add_definitions (-std=c99 -Wstrict-prototypes -Wextra -Wwrite-strings -Wuninitialized -Werror-implicit-function-declaration) #-Wunreachable-code -Wno-unused-parameter -Wall 
