@@ -1,0 +1,995 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/pkgbuild/!svn/ver/4421/spec-files-extra/trunk/ext-sources
+END
+SFEpound.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/2926/spec-files-extra/trunk/ext-sources/SFEpound.cfg
+END
+wine-appwiz.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/wine-appwiz.desktop
+END
+scorched3d.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/889/spec-files-extra/trunk/ext-sources/scorched3d.desktop
+END
+coherence.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/1920/spec-files-extra/trunk/ext-sources/coherence.xml
+END
+wine-winecfg.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/wine-winecfg.desktop
+END
+hudson.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/4421/spec-files-extra/trunk/ext-sources/hudson.xml
+END
+jenkins.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/4421/spec-files-extra/trunk/ext-sources/jenkins.xml
+END
+postgres-91-user_attr
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3775/spec-files-extra/trunk/ext-sources/postgres-91-user_attr
+END
+tor.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/pkgbuild/!svn/ver/4341/spec-files-extra/trunk/ext-sources/tor.xml
+END
+soundcard.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/1568/spec-files-extra/trunk/ext-sources/soundcard.h
+END
+postgres-90-postgres_90
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/pkgbuild/!svn/ver/3126/spec-files-extra/trunk/ext-sources/postgres-90-postgres_90
+END
+wine-wordpad.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/pkgbuild/!svn/ver/2112/spec-files-extra/trunk/ext-sources/wine-wordpad.desktop
+END
+kchart.files
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kchart.files
+END
+azureus.png
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/1224/spec-files-extra/trunk/ext-sources/azureus.png
+END
+kivio.files
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kivio.files
+END
+build_add_drv
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/888/spec-files-extra/trunk/ext-sources/build_add_drv
+END
+buildkde
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/pkgbuild/!svn/ver/871/spec-files-extra/trunk/ext-sources/buildkde
+END
+netpbm-Makefile.conf
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/pkgbuild/!svn/ver/2861/spec-files-extra/trunk/ext-sources/netpbm-Makefile.conf
+END
+libgda-jdbc-MANIFEST.MF
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/pkgbuild/!svn/ver/2591/spec-files-extra/trunk/ext-sources/libgda-jdbc-MANIFEST.MF
+END
+Xresources.fluxbox
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/pkgbuild/!svn/ver/1605/spec-files-extra/trunk/ext-sources/Xresources.fluxbox
+END
+winetricks.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/winetricks.desktop
+END
+postgres-91-prof_attr
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3775/spec-files-extra/trunk/ext-sources/postgres-91-prof_attr
+END
+http-nginx.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/3868/spec-files-extra/trunk/ext-sources/http-nginx.xml
+END
+syslog-ng.method
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/pkgbuild/!svn/ver/2168/spec-files-extra/trunk/ext-sources/syslog-ng.method
+END
+typolight.conf.example
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/pkgbuild/!svn/ver/2330/spec-files-extra/trunk/ext-sources/typolight.conf.example
+END
+miniupnpd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/4401/spec-files-extra/trunk/ext-sources/miniupnpd.xml
+END
+dovecot.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/1613/spec-files-extra/trunk/ext-sources/dovecot.xml
+END
+dspam.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/2519/spec-files-extra/trunk/ext-sources/dspam.xml
+END
+spamassassin.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/pkgbuild/!svn/ver/1840/spec-files-extra/trunk/ext-sources/spamassassin.xml
+END
+pure-ftpd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/2322/spec-files-extra/trunk/ext-sources/pure-ftpd.xml
+END
+byteswap-compat.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/2971/spec-files-extra/trunk/ext-sources/byteswap-compat.h
+END
+postfix-saslauthd.conf
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/pkgbuild/!svn/ver/3274/spec-files-extra/trunk/ext-sources/postfix-saslauthd.conf
+END
+azureus.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/1224/spec-files-extra/trunk/ext-sources/azureus.desktop
+END
+default-copyright.txt
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/pkgbuild/!svn/ver/747/spec-files-extra/trunk/ext-sources/default-copyright.txt
+END
+x11.pc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/pkgbuild/!svn/ver/874/spec-files-extra/trunk/ext-sources/x11.pc
+END
+Maelstrom.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/pkgbuild/!svn/ver/745/spec-files-extra/trunk/ext-sources/Maelstrom.desktop
+END
+ext2fs.pc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/pkgbuild/!svn/ver/876/spec-files-extra/trunk/ext-sources/ext2fs.pc
+END
+unixODBC.pc
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/2763/spec-files-extra/trunk/ext-sources/unixODBC.pc
+END
+sambagnu-smbd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/3426/spec-files-extra/trunk/ext-sources/sambagnu-smbd.xml
+END
+wine-taskmgr.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/wine-taskmgr.desktop
+END
+lprng.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/1634/spec-files-extra/trunk/ext-sources/lprng.xml
+END
+kformula.files
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kformula.files
+END
+syslog-ng.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/2168/spec-files-extra/trunk/ext-sources/syslog-ng.xml
+END
+nexuiz
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/pkgbuild/!svn/ver/2648/spec-files-extra/trunk/ext-sources/nexuiz
+END
+karbon14.files
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/karbon14.files
+END
+wine-winemine.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/wine-winemine.desktop
+END
+asterisk.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/4403/spec-files-extra/trunk/ext-sources/asterisk.xml
+END
+Fvwm.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/3593/spec-files-extra/trunk/ext-sources/Fvwm.desktop
+END
+sambagnu-winbindd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3426/spec-files-extra/trunk/ext-sources/sambagnu-winbindd.xml
+END
+openafs.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/4413/spec-files-extra/trunk/ext-sources/openafs.xml
+END
+eclipse.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/745/spec-files-extra/trunk/ext-sources/eclipse.desktop
+END
+xmonad.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/2200/spec-files-extra/trunk/ext-sources/xmonad.desktop
+END
+mod_gnutls.conf
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/2982/spec-files-extra/trunk/ext-sources/mod_gnutls.conf
+END
+http-nginx
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/3030/spec-files-extra/trunk/ext-sources/http-nginx
+END
+svc-uptimed
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/2222/spec-files-extra/trunk/ext-sources/svc-uptimed
+END
+tor.prof_attr
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/4021/spec-files-extra/trunk/ext-sources/tor.prof_attr
+END
+wine.directory
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/2361/spec-files-extra/trunk/ext-sources/wine.directory
+END
+xfig.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/2515/spec-files-extra/trunk/ext-sources/xfig.desktop
+END
+postgres-91-postgresql_91.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/pkgbuild/!svn/ver/3775/spec-files-extra/trunk/ext-sources/postgres-91-postgresql_91.xml
+END
+uptimed.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/2222/spec-files-extra/trunk/ext-sources/uptimed.xml
+END
+i.renamenew
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/1839/spec-files-extra/trunk/ext-sources/i.renamenew
+END
+jenkins.sh
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/4420/spec-files-extra/trunk/ext-sources/jenkins.sh
+END
+wine-winefile.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/wine-winefile.desktop
+END
+README-Postfix-SASL-RedHat.txt
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/pkgbuild/!svn/ver/3336/spec-files-extra/trunk/ext-sources/README-Postfix-SASL-RedHat.txt
+END
+SFEphp52-yaml.ini
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/3902/spec-files-extra/trunk/ext-sources/SFEphp52-yaml.ini
+END
+krita.files
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/krita.files
+END
+SimGear_Props.cxx
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/1503/spec-files-extra/trunk/ext-sources/SimGear_Props.cxx
+END
+nagios.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/3263/spec-files-extra/trunk/ext-sources/nagios.xml
+END
+Xresources.xfce
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/3364/spec-files-extra/trunk/ext-sources/Xresources.xfce
+END
+lightdm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/2910/spec-files-extra/trunk/ext-sources/lightdm.xml
+END
+sugar.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/2332/spec-files-extra/trunk/ext-sources/sugar.desktop
+END
+C++-filesystem-layout.dot
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/pkgbuild/!svn/ver/3470/spec-files-extra/trunk/ext-sources/C++-filesystem-layout.dot
+END
+SFEdrupal7.conf.example
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/pkgbuild/!svn/ver/3218/spec-files-extra/trunk/ext-sources/SFEdrupal7.conf.example
+END
+qt4-solaris-cc-ss12
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/pkgbuild/!svn/ver/1533/spec-files-extra/trunk/ext-sources/qt4-solaris-cc-ss12
+END
+XmStrDefs21.ht
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/886/spec-files-extra/trunk/ext-sources/XmStrDefs21.ht
+END
+scorched3d.png
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/889/spec-files-extra/trunk/ext-sources/scorched3d.png
+END
+Xinitrc.xfce
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/3364/spec-files-extra/trunk/ext-sources/Xinitrc.xfce
+END
+bitlbee.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/4421/spec-files-extra/trunk/ext-sources/bitlbee.xml
+END
+Xinitrc.fluxbox
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/1605/spec-files-extra/trunk/ext-sources/Xinitrc.fluxbox
+END
+wordpress.conf.example
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/pkgbuild/!svn/ver/3115/spec-files-extra/trunk/ext-sources/wordpress.conf.example
+END
+hudson.sh
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/4418/spec-files-extra/trunk/ext-sources/hudson.sh
+END
+CorsixTH-16.png
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/3077/spec-files-extra/trunk/ext-sources/CorsixTH-16.png
+END
+kde.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/795/spec-files-extra/trunk/ext-sources/kde.desktop
+END
+wine-cmd.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/wine-cmd.desktop
+END
+ipfilter.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/4382/spec-files-extra/trunk/ext-sources/ipfilter.xml
+END
+lbreakout2.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/879/spec-files-extra/trunk/ext-sources/lbreakout2.desktop
+END
+Xsession2.fluxbox
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/1605/spec-files-extra/trunk/ext-sources/Xsession2.fluxbox
+END
+lyx.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/3676/spec-files-extra/trunk/ext-sources/lyx.desktop
+END
+postgres-90-auth_attr
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3126/spec-files-extra/trunk/ext-sources/postgres-90-auth_attr
+END
+mt-daapd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/2967/spec-files-extra/trunk/ext-sources/mt-daapd.xml
+END
+SFEpound-manifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/2926/spec-files-extra/trunk/ext-sources/SFEpound-manifest.xml
+END
+kword.files
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kword.files
+END
+domain-samba3.reg
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/3426/spec-files-extra/trunk/ext-sources/domain-samba3.reg
+END
+freeradius.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/3116/spec-files-extra/trunk/ext-sources/freeradius.xml
+END
+xfce.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/3364/spec-files-extra/trunk/ext-sources/xfce.desktop
+END
+freemind.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/pkgbuild/!svn/ver/1207/spec-files-extra/trunk/ext-sources/freemind.desktop
+END
+Xinitrc.E
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/1605/spec-files-extra/trunk/ext-sources/Xinitrc.E
+END
+postgres-90-postgresql_90.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/pkgbuild/!svn/ver/3126/spec-files-extra/trunk/ext-sources/postgres-90-postgresql_90.xml
+END
+libfuse.exec_attr
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/2808/spec-files-extra/trunk/ext-sources/libfuse.exec_attr
+END
+addmachinescript-samba3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/pkgbuild/!svn/ver/3426/spec-files-extra/trunk/ext-sources/addmachinescript-samba3
+END
+libev.pc.in
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/2915/spec-files-extra/trunk/ext-sources/libev.pc.in
+END
+koffice.files
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/koffice.files
+END
+xmms.png
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/pkgbuild/!svn/ver/1091/spec-files-extra/trunk/ext-sources/xmms.png
+END
+svn-config
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/819/spec-files-extra/trunk/ext-sources/svn-config
+END
+postgres-91-postgres_91
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/pkgbuild/!svn/ver/3775/spec-files-extra/trunk/ext-sources/postgres-91-postgres_91
+END
+secondlife
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/2326/spec-files-extra/trunk/ext-sources/secondlife
+END
+CorsixTH-64.png
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/3077/spec-files-extra/trunk/ext-sources/CorsixTH-64.png
+END
+coherence.conf
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/1920/spec-files-extra/trunk/ext-sources/coherence.conf
+END
+Xsession2.xfce
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/3364/spec-files-extra/trunk/ext-sources/Xsession2.xfce
+END
+typolight-htaccess-protect-backend
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/pkgbuild/!svn/ver/2330/spec-files-extra/trunk/ext-sources/typolight-htaccess-protect-backend
+END
+kpresenter.files
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kpresenter.files
+END
+netpbm-s10-Makefile.conf
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/pkgbuild/!svn/ver/2861/spec-files-extra/trunk/ext-sources/netpbm-s10-Makefile.conf
+END
+nspr-nss-config
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/3066/spec-files-extra/trunk/ext-sources/nspr-nss-config
+END
+kspread.files
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kspread.files
+END
+drvrm
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/pkgbuild/!svn/ver/888/spec-files-extra/trunk/ext-sources/drvrm
+END
+c-icap.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/3089/spec-files-extra/trunk/ext-sources/c-icap.xml
+END
+coherence
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/1920/spec-files-extra/trunk/ext-sources/coherence
+END
+xmms.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/1091/spec-files-extra/trunk/ext-sources/xmms.desktop
+END
+Xsession.E
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/1605/spec-files-extra/trunk/ext-sources/Xsession.E
+END
+Xsession.xfce
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/3364/spec-files-extra/trunk/ext-sources/Xsession.xfce
+END
+wine-notepad.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/wine-notepad.desktop
+END
+endian-compat.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/2971/spec-files-extra/trunk/ext-sources/endian-compat.h
+END
+syslog-ng.conf
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/2168/spec-files-extra/trunk/ext-sources/syslog-ng.conf
+END
+azureus.sh
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/1224/spec-files-extra/trunk/ext-sources/azureus.sh
+END
+postgres-90-exec_attr
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3126/spec-files-extra/trunk/ext-sources/postgres-90-exec_attr
+END
+CorsixTH-32.png
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/3077/spec-files-extra/trunk/ext-sources/CorsixTH-32.png
+END
+rox.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/2619/spec-files-extra/trunk/ext-sources/rox.desktop
+END
+xfig.png
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/pkgbuild/!svn/ver/2515/spec-files-extra/trunk/ext-sources/xfig.png
+END
+corsixth.txt
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/3077/spec-files-extra/trunk/ext-sources/corsixth.txt
+END
+samba.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/1413/spec-files-extra/trunk/ext-sources/samba.xml
+END
+Xresources.E
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/1605/spec-files-extra/trunk/ext-sources/Xresources.E
+END
+postgres-91-auth_attr
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3775/spec-files-extra/trunk/ext-sources/postgres-91-auth_attr
+END
+libfuse.prof_attr
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/2808/spec-files-extra/trunk/ext-sources/libfuse.prof_attr
+END
+wine-svg-icons.tar.bz2
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/pkgbuild/!svn/ver/2361/spec-files-extra/trunk/ext-sources/wine-svg-icons.tar.bz2
+END
+kexi.files
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kexi.files
+END
+Xsession.fluxbox
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/pkgbuild/!svn/ver/1605/spec-files-extra/trunk/ext-sources/Xsession.fluxbox
+END
+postgres-90-user_attr
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3126/spec-files-extra/trunk/ext-sources/postgres-90-user_attr
+END
+postfix-spamassassin-wiki.apache.org-filter.sh
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/pkgbuild/!svn/ver/1839/spec-files-extra/trunk/ext-sources/postfix-spamassassin-wiki.apache.org-filter.sh
+END
+drvtestadd
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/888/spec-files-extra/trunk/ext-sources/drvtestadd
+END
+nntpcached.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/1851/spec-files-extra/trunk/ext-sources/nntpcached.xml
+END
+sambagnu-nmbd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/3426/spec-files-extra/trunk/ext-sources/sambagnu-nmbd.xml
+END
+kugar.files
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kugar.files
+END
+proftpd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/3291/spec-files-extra/trunk/ext-sources/proftpd.xml
+END
+etc_system
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/888/spec-files-extra/trunk/ext-sources/etc_system
+END
+postfix-sasl.conf
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/3274/spec-files-extra/trunk/ext-sources/postfix-sasl.conf
+END
+Xsession2.E
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/1605/spec-files-extra/trunk/ext-sources/Xsession2.E
+END
+svc-lightdm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/2910/spec-files-extra/trunk/ext-sources/svc-lightdm
+END
+svc-freeradius
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/3121/spec-files-extra/trunk/ext-sources/svc-freeradius
+END
+qmake.conf
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/pkgbuild/!svn/ver/3140/spec-files-extra/trunk/ext-sources/qmake.conf
+END
+smf-grey.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/pkgbuild/!svn/ver/2756/spec-files-extra/trunk/ext-sources/smf-grey.xml
+END
+postgres-90-prof_attr
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3126/spec-files-extra/trunk/ext-sources/postgres-90-prof_attr
+END
+postfix.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/3778/spec-files-extra/trunk/ext-sources/postfix.xml
+END
+kplato.files
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/843/spec-files-extra/trunk/ext-sources/kplato.files
+END
+wine-regedit.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/pkgbuild/!svn/ver/2111/spec-files-extra/trunk/ext-sources/wine-regedit.desktop
+END
+openal_license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/pkgbuild/!svn/ver/1205/spec-files-extra/trunk/ext-sources/openal_license.txt
+END
+tor.auth_attr
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/4021/spec-files-extra/trunk/ext-sources/tor.auth_attr
+END
+fluxbox.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/745/spec-files-extra/trunk/ext-sources/fluxbox.desktop
+END
+windowmaker.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/pkgbuild/!svn/ver/4283/spec-files-extra/trunk/ext-sources/windowmaker.desktop
+END
+R-MachineLearning.stdin
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/pkgbuild/!svn/ver/1850/spec-files-extra/trunk/ext-sources/R-MachineLearning.stdin
+END
+postgres-91-exec_attr
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/pkgbuild/!svn/ver/3775/spec-files-extra/trunk/ext-sources/postgres-91-exec_attr
+END
+unbound.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/1966/spec-files-extra/trunk/ext-sources/unbound.xml
+END
+ossec.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/pkgbuild/!svn/ver/4404/spec-files-extra/trunk/ext-sources/ossec.xml
+END
+asound.conf
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/2971/spec-files-extra/trunk/ext-sources/asound.conf
+END
+tor.sh
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/pkgbuild/!svn/ver/4021/spec-files-extra/trunk/ext-sources/tor.sh
+END
+varnish-manifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/pkgbuild/!svn/ver/3946/spec-files-extra/trunk/ext-sources/varnish-manifest.xml
+END

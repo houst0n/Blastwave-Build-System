@@ -1,0 +1,161 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/pkgbuild/!svn/ver/4373/spec-files-extra/trunk/include
+END
+packagenames.define-specialcases-133.inc
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/pkgbuild/!svn/ver/2996/spec-files-extra/trunk/include/packagenames.define-specialcases-133.inc
+END
+desktop-database-install.script
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/pkgbuild/!svn/ver/1242/spec-files-extra/trunk/include/desktop-database-install.script
+END
+base.inc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/pkgbuild/!svn/ver/3938/spec-files-extra/trunk/include/base.inc
+END
+packagenames.define-specialcases-134.inc
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/pkgbuild/!svn/ver/2996/spec-files-extra/trunk/include/packagenames.define-specialcases-134.inc
+END
+packagenames.define-133.inc
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/pkgbuild/!svn/ver/2996/spec-files-extra/trunk/include/packagenames.define-133.inc
+END
+Solaris.inc
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/pkgbuild/!svn/ver/1897/spec-files-extra/trunk/include/Solaris.inc
+END
+packagenames.define-134.inc
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/pkgbuild/!svn/ver/2996/spec-files-extra/trunk/include/packagenames.define-134.inc
+END
+desktop-database-uninstall.script
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/pkgbuild/!svn/ver/1242/spec-files-extra/trunk/include/desktop-database-uninstall.script
+END
+perditionparentversion.inc
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/pkgbuild/!svn/ver/4373/spec-files-extra/trunk/include/perditionparentversion.inc
+END
+stdcxx.inc
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/pkgbuild/!svn/ver/3135/spec-files-extra/trunk/include/stdcxx.inc
+END
+default-depend.inc
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/pkgbuild/!svn/ver/1812/spec-files-extra/trunk/include/default-depend.inc
+END
+x86_sse2.inc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/pkgbuild/!svn/ver/3705/spec-files-extra/trunk/include/x86_sse2.inc
+END
+packagenames.define.allbuilds.inc
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/pkgbuild/!svn/ver/4190/spec-files-extra/trunk/include/packagenames.define.allbuilds.inc
+END
+icon-cache.script
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/pkgbuild/!svn/ver/1242/spec-files-extra/trunk/include/icon-cache.script
+END
+arch64.inc
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/pkgbuild/!svn/ver/3909/spec-files-extra/trunk/include/arch64.inc
+END
+options.inc
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/pkgbuild/!svn/ver/657/spec-files-extra/trunk/include/options.inc
+END
+gconf-install.script
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/pkgbuild/!svn/ver/899/spec-files-extra/trunk/include/gconf-install.script
+END
+CC-wrapper
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/pkgbuild/!svn/ver/262/spec-files-extra/trunk/include/CC-wrapper
+END
+packagenames.define-specialcases-81.inc
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/pkgbuild/!svn/ver/2996/spec-files-extra/trunk/include/packagenames.define-specialcases-81.inc
+END
+packagenames.define-81.inc
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/pkgbuild/!svn/ver/2996/spec-files-extra/trunk/include/packagenames.define-81.inc
+END
+perl-depend.inc
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/pkgbuild/!svn/ver/3584/spec-files-extra/trunk/include/perl-depend.inc
+END
+usr-gnu.inc
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/pkgbuild/!svn/ver/102/spec-files-extra/trunk/include/usr-gnu.inc
+END
+packagenamemacros.inc
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/pkgbuild/!svn/ver/3283/spec-files-extra/trunk/include/packagenamemacros.inc
+END
+prod.inc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/pkgbuild/!svn/ver/1947/spec-files-extra/trunk/include/prod.inc
+END
+scrollkeeper-update.script
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/pkgbuild/!svn/ver/1242/spec-files-extra/trunk/include/scrollkeeper-update.script
+END
+osdistro.inc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/pkgbuild/!svn/ver/4006/spec-files-extra/trunk/include/osdistro.inc
+END
