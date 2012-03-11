@@ -18,7 +18,7 @@ Summary:                 CURL URL
 Version:                 7.24.0
 Source:			 http://curl.haxx.se/download/curl-%{version}.tar.gz
 SUNW_BaseDir:            %{_basedir}
-BuildRoot:               %{_tmppath}/%{name}-%{version}-build
+BuildRoot:               %{_tmppath}/curl-%{version}-build
 %include default-depend.inc
 
 %if %build_l10n
@@ -66,13 +66,14 @@ export LDFLAGS=
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%curl.install -d curl-%version/%{base_arch}
+
 %ifarch amd64 sparcv9
-%curl_64.install -d %name-%version/%_arch64
+%curl_64.install -d curl-%version/%_arch64
 # 64-bit binaries are of no benefit
 rm -rf $RPM_BUILD_ROOT%{_bindir}/%_arch64
 %endif
 
-%curl.install -d curl-%version/%{base_arch}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
