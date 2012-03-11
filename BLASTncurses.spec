@@ -107,13 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %changelog
-* Sun Aug 10 2008 - andras.barna@gmail.com
-- Split data files, for SFEncursesw
-* Fri Jan 11 2008 - moinak.ghosh@sun.com
-- Added proper 64-bit link flags to work with Sun Studio 11 and gcc
-* Sun Nov 4 2007 - markwright@internode.on.net
-- Bump to 5.6.  Set LDFLAGS=-m64 for 64 bit build.
-* Tue Mar 20 2007 - dougs@truemail.co.th
-- Move build to a base spec. Added 64bit build
-* Wed Nov 08 2006 - Eric Boutilier
-- Initial spec
+* Sun Mar 11 2012 - neil.a.houston@gmail.com
+- Initial SPEC
+
+- 
