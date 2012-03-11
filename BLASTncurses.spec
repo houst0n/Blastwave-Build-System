@@ -4,7 +4,7 @@
 # package are under the same license as the package itself.
 
 %include Solaris.inc
-%include usr-gnu.inc
+%include opt-blast.inc
 
 %ifarch amd64 sparcv9
 %include arch64.inc
