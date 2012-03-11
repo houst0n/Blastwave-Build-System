@@ -1,0 +1,15 @@
+Hi there.
+
+To get started, first you need to obtain the fantastic pkgbuild software from the ever talanted laszlo.
+
+Get it here: http://pkgbuild.sourceforge.net/
+
+Next, you want bootstrap it into /opt/blast as follows:
+
+-bash-3.2$ ./configure --prefix=/opt/blast
+-bash-3.2$ gmake
+-bash-3.2$ gmake install
+
+Next, you need the SUN Studio Compilers, currently supported version is 12.3 - grab them from oracle.com
+
+
