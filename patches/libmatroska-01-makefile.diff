@@ -1,0 +1,30 @@
+--- libmatroska-1.0.0/make/linux/Makefile.orig	Fri Jun  4 04:46:29 2010
++++ libmatroska-1.0.0/make/linux/Makefile	Sat Oct  9 16:24:08 2010
+@@ -72,6 +72,9 @@
+ COMPILEFLAGS=$(DEBUGFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(WARNINGFLAGS) $(INCLUDE)
+ LINKFLAGS=-L. -L$(LIBEBML_LIB_DIR) $(LDFLAGS)
+ DEPENDFLAGS  = $(CXXFLAGS) $(INCLUDE)
++LOFLAGS=-fPIC
++ARFLAGS=rcvu
++LIBSOFLAGS=-Wl,-soname,
+ 
+ ifeq (Darwin,$(shell uname -s))
+ all: staticlib
+@@ -92,14 +95,14 @@
+ 	$(CXX) -c $(COMPILEFLAGS) -o $@ $<
+ 
+ %.lo: %$(EXTENSION)
+-	$(CXX) -c $(COMPILEFLAGS) -fPIC -o $@ $<
++	$(CXX) -c $(COMPILEFLAGS) $(LOFLAGS) -o $@ $<
+ 
+ $(LIBRARY): $(objects)
+-	$(AR) rcvu $@ $(objects)
++	$(AR) $(ARFLAGS) $@ $(objects)
+ 	$(RANLIB) $@
+ 
+ $(LIBRARY_SO): $(objects_so)
+-	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so) -lebml
++	$(CXX) -shared $(LIBSOFLAGS)$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so) -lebml
+ 	rm -f $(LIBRARY_SO)
+ 	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
+ 

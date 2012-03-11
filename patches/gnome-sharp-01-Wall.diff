@@ -1,0 +1,13 @@
+--- a/configure.in	Mon Sep 19 06:18:13 2011
++++ b/configure.in	Mon Sep 19 06:19:08 2011
+@@ -58,7 +58,9 @@
+ # not 64 bit clean in cross-compile
+ AC_CHECK_SIZEOF(void *, 4)
+ 
+-CFLAGS="-g -Wall -Wunused -Wmissing-prototypes -Wmissing-declarations -Wstrict-prototypes  -Wmissing-prototypes -Wnested-externs  -Wshadow -Wpointer-arith -Wno-cast-qual -Wcast-align -Wwrite-strings"
++if [ "x$GCC" = xyes ]; then
++  CFLAGS="-g -Wall -Wunused -Wmissing-prototypes -Wmissing-declarations -Wstrict-prototypes  -Wmissing-prototypes -Wnested-externs  -Wshadow -Wpointer-arith -Wno-cast-qual -Wcast-align -Wwrite-strings"
++fi
+ 
+ if test "x$enable_maintainer_mode" = "xyes"; then
+ DEBUG_FLAGS='-debug'

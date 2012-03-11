@@ -36,11 +36,11 @@ SUNW_Copyright:            default-copyright.txt
 # can_isaexec gets redefined to 1 if multiple isas are built
 %define can_isaexec 0
 %ifarch sparc
-%define base_isa sparcv7
-%define base_arch sparc
+%define base_isa sparcv9
+%define base_arch sparcv9
 %else
-%define base_isa i86
-%define base_arch i386
+%define base_isa amd64
+%define base_arch amd64
 %endif
 
 %if %option_with_gnu_iconv

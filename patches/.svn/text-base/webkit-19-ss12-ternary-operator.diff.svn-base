@@ -1,0 +1,197 @@
+--- webkit-1.2.7/WebCore/html/HTMLParser.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/html/HTMLParser.cpp	Sat Mar 19 23:16:20 2011
+@@ -143,7 +143,7 @@
+     , m_handlingResidualStyleAcrossBlocks(false)
+     , m_inStrayTableContent(0)
+     , m_scriptingPermission(FragmentScriptingAllowed)
+-    , m_parserQuirks(m_document->page() ? m_document->page()->chrome()->client()->createHTMLParserQuirks() : 0)
++    , m_parserQuirks(m_document->page() ? m_document->page()->chrome()->client()->createHTMLParserQuirks() : PassOwnPtr<HTMLParserQuirks>(0))
+ {
+ }
+ 
+@@ -163,7 +163,7 @@
+     , m_handlingResidualStyleAcrossBlocks(false)
+     , m_inStrayTableContent(0)
+     , m_scriptingPermission(scriptingPermission)
+-    , m_parserQuirks(m_document->page() ? m_document->page()->chrome()->client()->createHTMLParserQuirks() : 0)
++    , m_parserQuirks(m_document->page() ? m_document->page()->chrome()->client()->createHTMLParserQuirks() : PassOwnPtr<HTMLParserQuirks>(0))
+ {
+     if (frag)
+         frag->ref();
+--- webkit-1.2.7/WebCore/loader/DocumentLoader.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/loader/DocumentLoader.cpp	Sat Mar 19 23:16:20 2011
+@@ -438,7 +438,7 @@
+ 
+ PassRefPtr<Archive> DocumentLoader::popArchiveForSubframe(const String& frameName)
+ {
+-    return m_archiveResourceCollection ? m_archiveResourceCollection->popSubframeArchive(frameName) : 0;
++    return m_archiveResourceCollection ? m_archiveResourceCollection->popSubframeArchive(frameName) : PassRefPtr<Archive>(0);
+ }
+ 
+ void DocumentLoader::clearArchiveResources()
+--- webkit-1.2.7/WebCore/editing/markup.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/editing/markup.cpp	Sat Mar 19 23:16:20 2011
+@@ -973,7 +973,7 @@
+     Node* body = enclosingNodeWithTag(Position(commonAncestor, 0), bodyTag);
+     // FIXME: Do this for all fully selected blocks, not just the body.
+     Node* fullySelectedRoot = body && *VisibleSelection::selectionFromContentsOfNode(body).toNormalizedRange() == *updatedRange ? body : 0;
+-    RefPtr<CSSMutableStyleDeclaration> fullySelectedRootStyle = fullySelectedRoot ? styleFromMatchedRulesAndInlineDecl(fullySelectedRoot) : 0;
++    RefPtr<CSSMutableStyleDeclaration> fullySelectedRootStyle = fullySelectedRoot ? styleFromMatchedRulesAndInlineDecl(fullySelectedRoot) : PassRefPtr<CSSMutableStyleDeclaration>(0);
+     if (annotate && fullySelectedRoot) {
+         if (shouldIncludeWrapperForFullySelectedRoot(fullySelectedRoot, fullySelectedRootStyle.get()))
+             specialCommonAncestor = fullySelectedRoot;
+--- webkit-1.2.7/WebCore/editing/CompositeEditCommand.cpp	Tue Dec 28 13:24:33 2010
++++ webkit-1.2.7-patch/WebCore/editing/CompositeEditCommand.cpp	Sat Mar 19 23:16:20 2011
+@@ -930,7 +930,7 @@
+ 
+     // FIXME: This is an inefficient way to preserve style on nodes in the paragraph to move. It
+     // shouldn't matter though, since moved paragraphs will usually be quite small.
+-    RefPtr<DocumentFragment> fragment = startOfParagraphToMove != endOfParagraphToMove ? createFragmentFromMarkup(document(), createMarkup(range.get(), 0, DoNotAnnotateForInterchange, true), "") : 0;
++    RefPtr<DocumentFragment> fragment = startOfParagraphToMove != endOfParagraphToMove ? createFragmentFromMarkup(document(), createMarkup(range.get(), 0, DoNotAnnotateForInterchange, true), "") : PassRefPtr<DocumentFragment>(0);
+     
+     // A non-empty paragraph's style is moved when we copy and move it.  We don't move 
+     // anything if we're given an empty paragraph, but an empty paragraph can have style
+--- webkit-1.2.7/WebCore/css/CSSComputedStyleDeclaration.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/css/CSSComputedStyleDeclaration.cpp	Sat Mar 19 23:16:20 2011
+@@ -568,8 +568,8 @@
+         RefPtr<CSSPrimitiveValue> x = CSSPrimitiveValue::create(s->x, CSSPrimitiveValue::CSS_PX);
+         RefPtr<CSSPrimitiveValue> y = CSSPrimitiveValue::create(s->y, CSSPrimitiveValue::CSS_PX);
+         RefPtr<CSSPrimitiveValue> blur = CSSPrimitiveValue::create(s->blur, CSSPrimitiveValue::CSS_PX);
+-        RefPtr<CSSPrimitiveValue> spread = propertyID == CSSPropertyTextShadow ? 0 : CSSPrimitiveValue::create(s->spread, CSSPrimitiveValue::CSS_PX);
+-        RefPtr<CSSPrimitiveValue> style = propertyID == CSSPropertyTextShadow || s->style == Normal ? 0 : CSSPrimitiveValue::createIdentifier(CSSValueInset);
++        RefPtr<CSSPrimitiveValue> spread = propertyID == CSSPropertyTextShadow ? PassRefPtr<CSSPrimitiveValue>(0) : CSSPrimitiveValue::create(s->spread, CSSPrimitiveValue::CSS_PX);
++        RefPtr<CSSPrimitiveValue> style = propertyID == CSSPropertyTextShadow || s->style == Normal ? PassRefPtr<CSSPrimitiveValue>(0) : CSSPrimitiveValue::createIdentifier(CSSValueInset);
+         RefPtr<CSSPrimitiveValue> color = CSSPrimitiveValue::createColor(s->color.rgb());
+         list->prepend(ShadowValue::create(x.release(), y.release(), blur.release(), spread.release(), style.release(), color.release()));
+     }
+--- webkit-1.2.7/WebCore/bindings/js/JSJavaScriptCallFrameCustom.cpp	Fri Sep 10 15:20:32 2010
++++ webkit-1.2.7-patch/WebCore/bindings/js/JSJavaScriptCallFrameCustom.cpp	Sat Mar 19 23:16:20 2011
+@@ -48,7 +48,7 @@
+ 
+ JSValue JSJavaScriptCallFrame::thisObject(ExecState*) const
+ {
+-    return impl()->thisObject() ? impl()->thisObject() : jsNull();
++    return impl()->thisObject() ? (JSValue)impl()->thisObject() : jsNull();
+ }
+ 
+ JSValue JSJavaScriptCallFrame::type(ExecState* exec) const
+--- webkit-1.2.7/WebCore/loader/icon/IconDatabase.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/loader/icon/IconDatabase.cpp	Sat Mar 19 23:16:20 2011
+@@ -511,7 +511,7 @@
+     if (!isOpen() || iconURLOriginal.isEmpty())
+         return;
+     
+-    RefPtr<SharedBuffer> data = dataOriginal ? dataOriginal->copy() : 0;
++    RefPtr<SharedBuffer> data = dataOriginal ? dataOriginal->copy() : (PassRefPtr<SharedBuffer>)0;
+     String iconURL = iconURLOriginal.crossThreadString();
+     
+     Vector<String> pageURLs;
+--- webkit-1.2.7/WebCore/loader/archive/ArchiveResource.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/loader/archive/ArchiveResource.cpp	Sat Mar 19 23:16:20 2011
+@@ -35,17 +35,17 @@
+ 
+ PassRefPtr<ArchiveResource> ArchiveResource::create(PassRefPtr<SharedBuffer> data, const KURL& url, const ResourceResponse& response)
+ {
+-    return data ? adoptRef(new ArchiveResource(data, url, response)) : 0;
++    return data ? adoptRef(new ArchiveResource(data, url, response)) : PassRefPtr<ArchiveResource>(0);
+ }
+ 
+ PassRefPtr<ArchiveResource> ArchiveResource::create(PassRefPtr<SharedBuffer> data, const KURL& url, const String& mimeType, const String& textEncoding, const String& frameName)
+ {
+-    return data ? adoptRef(new ArchiveResource(data, url, mimeType, textEncoding, frameName)) : 0;
++    return data ? adoptRef(new ArchiveResource(data, url, mimeType, textEncoding, frameName)) : PassRefPtr<ArchiveResource>(0);
+ }
+ 
+ PassRefPtr<ArchiveResource> ArchiveResource::create(PassRefPtr<SharedBuffer> data, const KURL& url, const String& mimeType, const String& textEncoding, const String& frameName, const ResourceResponse& resourceResponse)
+ {
+-    return data ? adoptRef(new ArchiveResource(data, url, mimeType, textEncoding, frameName, resourceResponse)) : 0;
++    return data ? adoptRef(new ArchiveResource(data, url, mimeType, textEncoding, frameName, resourceResponse)) : PassRefPtr<ArchiveResource>(0);
+ }
+ 
+ ArchiveResource::ArchiveResource(PassRefPtr<SharedBuffer> data, const KURL& url, const ResourceResponse& response)
+--- webkit-1.2.7/WebCore/loader/archive/ArchiveFactory.cpp	Fri Mar 19 16:20:54 2010
++++ webkit-1.2.7-patch/WebCore/loader/archive/ArchiveFactory.cpp	Sat Mar 19 23:16:20 2011
+@@ -76,7 +76,7 @@
+ PassRefPtr<Archive> ArchiveFactory::create(SharedBuffer* data, const String& mimeType)
+ {
+     RawDataCreationFunction* function = archiveMIMETypes().get(mimeType);
+-    return function ? function(data) : 0;
++    return function ? function(data) : PassRefPtr<Archive>(0);
+ }
+ 
+ void ArchiveFactory::registerKnownArchiveMIMETypes()
+--- webkit-1.2.7/WebCore/page/animation/AnimationBase.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/page/animation/AnimationBase.cpp	Sat Mar 19 23:16:20 2011
+@@ -153,7 +153,7 @@
+         for (unsigned i = 0; i < size; i++) {
+             RefPtr<TransformOperation> fromOp = (i < fromSize) ? from.operations()[i].get() : 0;
+             RefPtr<TransformOperation> toOp = (i < toSize) ? to.operations()[i].get() : 0;
+-            RefPtr<TransformOperation> blendedOp = toOp ? toOp->blend(fromOp.get(), progress) : (fromOp ? fromOp->blend(0, progress, true) : 0);
++            RefPtr<TransformOperation> blendedOp = toOp ? toOp->blend(fromOp.get(), progress) : (fromOp ? fromOp->blend(0, progress, true) : PassRefPtr<TransformOperation>(0));
+             if (blendedOp)
+                 result.operations().append(blendedOp);
+             else {
+--- webkit-1.2.7/WebCore/rendering/RenderLayer.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/rendering/RenderLayer.cpp	Sat Mar 19 23:16:20 2011
+@@ -3427,7 +3427,7 @@
+ void RenderLayer::updateScrollCornerStyle()
+ {
+     RenderObject* actualRenderer = renderer()->node() ? renderer()->node()->shadowAncestorNode()->renderer() : renderer();
+-    RefPtr<RenderStyle> corner = renderer()->hasOverflowClip() ? actualRenderer->getUncachedPseudoStyle(SCROLLBAR_CORNER, actualRenderer->style()) : 0;
++    RefPtr<RenderStyle> corner = renderer()->hasOverflowClip() ? actualRenderer->getUncachedPseudoStyle(SCROLLBAR_CORNER, actualRenderer->style()) : PassRefPtr<RenderStyle>(0);
+     if (corner) {
+         if (!m_scrollCorner) {
+             m_scrollCorner = new (renderer()->renderArena()) RenderScrollbarPart(renderer()->document());
+@@ -3443,7 +3443,7 @@
+ void RenderLayer::updateResizerStyle()
+ {
+     RenderObject* actualRenderer = renderer()->node() ? renderer()->node()->shadowAncestorNode()->renderer() : renderer();
+-    RefPtr<RenderStyle> resizer = renderer()->hasOverflowClip() ? actualRenderer->getUncachedPseudoStyle(RESIZER, actualRenderer->style()) : 0;
++    RefPtr<RenderStyle> resizer = renderer()->hasOverflowClip() ? actualRenderer->getUncachedPseudoStyle(RESIZER, actualRenderer->style()) : PassRefPtr<RenderStyle>(0);
+     if (resizer) {
+         if (!m_resizer) {
+             m_resizer = new (renderer()->renderArena()) RenderScrollbarPart(renderer()->document());
+--- webkit-1.2.7/WebCore/rendering/RenderScrollbar.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/rendering/RenderScrollbar.cpp	Sat Mar 19 23:16:20 2011
+@@ -199,7 +199,7 @@
+     if (partType == NoPart)
+         return;
+ 
+-    RefPtr<RenderStyle> partStyle = !destroy ? getScrollbarPseudoStyle(partType,  pseudoForScrollbarPart(partType)) : 0;
++    RefPtr<RenderStyle> partStyle = !destroy ? getScrollbarPseudoStyle(partType,  pseudoForScrollbarPart(partType)) : PassRefPtr<RenderStyle>(0);
+     
+     bool needRenderer = !destroy && partStyle && partStyle->display() != NONE && partStyle->visibility() == VISIBLE;
+     
+--- webkit-1.2.7/WebCore/rendering/RenderTextFragment.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/rendering/RenderTextFragment.cpp	Sat Mar 19 23:16:20 2011
+@@ -28,7 +28,7 @@
+ namespace WebCore {
+ 
+ RenderTextFragment::RenderTextFragment(Node* node, StringImpl* str, int startOffset, int length)
+-    : RenderText(node, str ? str->substring(startOffset, length) : 0)
++    : RenderText(node, str ? str->substring(startOffset, length) : PassRefPtr<StringImpl>(0))
+     , m_start(startOffset)
+     , m_end(length)
+     , m_firstLetter(0)
+--- webkit-1.2.7/WebCore/loader/appcache/ApplicationCacheGroup.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/loader/appcache/ApplicationCacheGroup.cpp	Sat Mar 19 23:16:20 2011
+@@ -775,7 +775,7 @@
+             ASSERT(cacheStorage().isMaximumSizeReached() && m_calledReachedMaxAppCacheSize);
+         }
+ 
+-        RefPtr<ApplicationCache> oldNewestCache = (m_newestCache == m_cacheBeingUpdated) ? 0 : m_newestCache;
++        RefPtr<ApplicationCache> oldNewestCache = (m_newestCache == m_cacheBeingUpdated) ? RefPtr<ApplicationCache>(0) : m_newestCache;
+ 
+         setNewestCache(m_cacheBeingUpdated.release());
+         if (cacheStorage().storeNewestCache(this)) {
+--- webkit-1.2.7/WebCore/svg/SVGElement.cpp	Mon Feb  7 18:29:58 2011
++++ webkit-1.2.7-patch/WebCore/svg/SVGElement.cpp	Sat Mar 19 23:16:20 2011
+@@ -280,7 +280,7 @@
+             event->setTarget(currentTarget);
+             currentTarget->dispatchGenericEvent(event.release());
+         }
+-        currentTarget = (parent && parent->isSVGElement()) ? static_pointer_cast<SVGElement>(parent) : 0;
++        currentTarget = (parent && parent->isSVGElement()) ? static_pointer_cast<SVGElement>(parent) : RefPtr<SVGElement>(0);
+     }
+ }
+ 

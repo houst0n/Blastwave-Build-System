@@ -1,0 +1,98 @@
+--- 1.1.0.4/source/src/protos.h	Sun Nov 14 19:46:24 2010
++++ 1.1.0.4/source/src/protos.h	Sun Oct 23 19:45:15 2011
+@@ -243,8 +243,8 @@
+ extern void dot(int x, int y, float z);
+ extern void linestyle(float width, int r, int g, int b);
+ extern void blendbox(int x1, int y1, int x2, int y2, bool border, int tex = -1, color *c = NULL);
+-extern void quad(GLuint tex, float x, float y, float s, float tx, float ty, float tsx, float tsy = 0);
+-extern void quad(GLuint tex, vec &c1, vec &c2, float tx, float ty, float tsx, float tsy);
++extern void a_quad(GLuint tex, float x, float y, float s, float tx, float ty, float tsx, float tsy = 0);
++extern void a_quad(GLuint tex, vec &c1, vec &c2, float tx, float ty, float tsx, float tsy);
+ extern void circle(GLuint tex, float x, float y, float r, float tx, float ty, float tr, int subdiv = 32);
+ extern void setperspective(float fovy, float aspect, float nearplane, float farplane);
+ extern void sethudgunperspective(bool on);
+--- 1.1.0.4/source/src/rendergl.cpp	Sun Nov 14 19:46:24 2010
++++ 1.1.0.4/source/src/rendergl.cpp	Sun Oct 23 19:45:34 2011
+@@ -212,7 +212,7 @@
+     xtraverts += 4;
+ }
+ 
+-void quad(GLuint tex, float x, float y, float s, float tx, float ty, float tsx, float tsy)
++void a_quad(GLuint tex, float x, float y, float s, float tx, float ty, float tsx, float tsy)
+ {
+     if(!tsy) tsy = tsx;
+     glBindTexture(GL_TEXTURE_2D, tex);
+@@ -225,7 +225,7 @@
+     xtraverts += 4;
+ }
+ 
+-void quad(GLuint tex, const vec &c1, const vec &c2, float tx, float ty, float tsx, float tsy)
++void a_quad(GLuint tex, const vec &c1, const vec &c2, float tx, float ty, float tsx, float tsy)
+ {
+     if(!tsy) tsy = tsx;
+     glBindTexture(GL_TEXTURE_2D, tex);
+@@ -378,7 +378,7 @@
+     static Texture *tex = NULL;
+     if(!tex) tex = textureload("packages/misc/com.png");
+     float s = aboveheadiconsize/100.0f;
+-    quad(tex->id, vec(s/2.0f, 0.0f, s), vec(s/-2.0f, 0.0f, 0.0f), 0.0f, 0.0f, 1.0f, 1.0f);
++    a_quad(tex->id, vec(s/2.0f, 0.0f, s), vec(s/-2.0f, 0.0f, 0.0f), 0.0f, 0.0f, 1.0f, 1.0f);
+     glDisable(GL_BLEND);
+     glPopMatrix();
+ }
+--- 1.1.0.4/source/src/renderhud.cpp	Sun Nov 14 19:46:24 2010
++++ 1.1.0.4/source/src/renderhud.cpp	Sun Oct 23 19:45:43 2011
+@@ -4,7 +4,7 @@
+ 
+ void drawicon(Texture *tex, float x, float y, float s, int col, int row, float ts)
+ {
+-    if(tex && tex->xs == tex->ys) quad(tex->id, x, y, s, ts*col, ts*row, ts);
++    if(tex && tex->xs == tex->ys) a_quad(tex->id, x, y, s, ts*col, ts*row, ts);
+ }
+ 
+ inline void turn_on_transparency()
+@@ -439,7 +439,7 @@
+         }
+         glTranslatef(centerpos.x - halfviewsize, centerpos.y - halfviewsize , 0);
+         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+-        quad(minimaptex, 0, 0, radarviewsize, 0.0f, 0.0f, 1.0f);
++        a_quad(minimaptex, 0, 0, radarviewsize, 0.0f, 0.0f, 1.0f);
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+         glDisable(GL_BLEND);
+         vec mdd(mapdims[0], mapdims[1], 0);
+@@ -600,7 +600,7 @@
+         glColor3f(1, 1, 1);
+         static Texture *bordertex = NULL;
+         if(!bordertex) bordertex = textureload("packages/misc/compass-base.png", 3);
+-        quad(bordertex->id, centerpos.x-halfviewsize-16, centerpos.y-halfviewsize-16, radarviewsize+32, 0, 0, 1, 1);
++        a_quad(bordertex->id, centerpos.x-halfviewsize-16, centerpos.y-halfviewsize-16, radarviewsize+32, 0, 0, 1, 1);
+         if(!hidecompass)
+         {
+             static Texture *compasstex = NULL;
+@@ -608,7 +608,7 @@
+             glPushMatrix();
+             glTranslatef(centerpos.x, centerpos.y, 0);
+             glRotatef(-camera1->yaw, 0, 0, 1);
+-            quad(compasstex->id, -halfviewsize-8, -halfviewsize-8, radarviewsize+16, 0, 0, 1, 1);
++            a_quad(compasstex->id, -halfviewsize-8, -halfviewsize-8, radarviewsize+16, 0, 0, 1, 1);
+             glPopMatrix();
+         }
+     }
+@@ -620,7 +620,7 @@
+     glColor3f(1, 1, 1);
+     static Texture *icons = NULL;
+     if(!icons) icons = textureload("packages/misc/teamicons.png", 3);
+-    quad(icons->id, VIRTW-VIRTH/12-10, 10, VIRTH/12, team_base(spect ? players[player1->followplayercn]->team : player1->team) ? 0.5f : 0, 0, 0.49f, 1.0f);
++    a_quad(icons->id, VIRTW-VIRTH/12-10, 10, VIRTH/12, team_base(spect ? players[player1->followplayercn]->team : player1->team) ? 0.5f : 0, 0, 0.49f, 1.0f);
+ }
+ 
+ int damageblendmillis = 0;
+@@ -1007,7 +1007,7 @@
+     loopi(fmt ? 1 : 2)
+     {
+         glClear(GL_COLOR_BUFFER_BIT);
+-        quad(logo->id, (VIRTW-VIRTH)/2, 0, VIRTH, 0, 0, 1);
++        a_quad(logo->id, (VIRTW-VIRTH)/2, 0, VIRTH, 0, 0, 1);
+         if(fmt)
+         {
+             glEnable(GL_BLEND);

@@ -1,0 +1,691 @@
+--- deluge-torrent-0.5.9.1-orig/setup.py	2008-05-19 01:44:59.000000000 +0000
++++ deluge-torrent-0.5.9.1/setup.py	2008-06-19 16:36:05.997302854 +0000
+@@ -98,12 +98,12 @@
+ #    it has been removed to prevent confusion.
+ 
+ if not OS == "win":
+-    EXTRA_COMPILE_ARGS = ["-Wno-missing-braces", 
++    EXTRA_COMPILE_ARGS = [
+                 "-DHAVE_INCLUDE_LIBTORRENT_ASIO____ASIO_HPP=1", 
+                 "-DHAVE_INCLUDE_LIBTORRENT_ASIO_SSL_STREAM_HPP=1", 
+                 "-DHAVE_INCLUDE_LIBTORRENT_ASIO_IP_TCP_HPP=1", 
+                 "-DHAVE_PTHREAD=1", "-DTORRENT_USE_OPENSSL=1", "-DHAVE_SSL=1", 
+-                "-DNDEBUG=1", "-O2"]
++                "-DNDEBUG=1"]
+     if ARCH == "x64":
+         EXTRA_COMPILE_ARGS.append("-DAMD64")
+ 
+@@ -150,10 +150,10 @@
+     librariestype = [boost_filesystem, boost_date_time,
+             boost_thread, 'z', 'pthread', 'ssl', 'crypto']
+ 
+-    if os == "linux":
++    if OS == "nix" or OS == "linux":
+         librariestype += ['rt']
+     
+-    removals = ['-g', '-Wstrict-prototypes']
++    removals = ['-g', '-Wstrict-prototypes', '-OPT:Olimit=0']
+ 
+     if python_version == '2.5':
+         cv_opt = sysconfig.get_config_vars()["CFLAGS"]
+@@ -165,6 +165,10 @@
+         for removal in removals:
+             cv_opt = cv_opt.replace(removal, " ")
+         sysconfig.get_config_vars()["OPT"] = ' '.join(cv_opt.split())
++    cv_opt = sysconfig.get_config_vars()["BASECFLAGS"]
++    for removal in removals:
++        cv_opt = cv_opt.replace(removal, " ")
++    sysconfig.get_config_vars()["BASECFLAGS"] = ' '.join(cv_opt.split())
+ else:
+     EXTRA_COMPILE_ARGS = [  '-O2', '-DBOOST_WINDOWS',
+                             '-fno-strict-aliasing',
+@@ -215,7 +219,8 @@
+                     libraries = librariestype,
+                     extra_compile_args = EXTRA_COMPILE_ARGS,
+                     extra_link_args = EXTRA_LINK_ARGS,
+-                    sources = sources)
++                    sources = sources,
++                    language = 'c++')
+ 
+ # Thanks to Iain Nicol for code to save the location for installed prefix
+ # At runtime, we need to know where we installed the data to.
+--- deluge-torrent-0.5.9.1-orig/libtorrent/include/libtorrent/xml_parse.hpp	2008-05-11 23:55:17.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/include/libtorrent/xml_parse.hpp	2008-06-19 16:36:05.997593489 +0000
+@@ -128,7 +128,7 @@
+ 				*(p-1) = '?';
+ 				tag_end = p - 1;
+ 			}
+-			else if (start + 5 < p && memcmp(start, "!--", 3) == 0 && memcmp(p-2, "--", 2) == 0)
++			else if (start + 5 < p && std::memcmp(start, "!--", 3) == 0 && std::memcmp(p-2, "--", 2) == 0)
+ 			{
+ 				start += 3;
+ 				*(p-2) = 0;
+--- deluge-torrent-0.5.9.1-orig/libtorrent/include/libtorrent/asio/detail/socket_ops.hpp	2008-05-11 23:55:17.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/include/libtorrent/asio/detail/socket_ops.hpp	2008-06-19 16:36:05.998558743 +0000
+@@ -197,7 +197,10 @@
+ #if defined(BOOST_WINDOWS) || defined(__CYGWIN__)
+   b.buf = static_cast<char*>(data);
+   b.len = static_cast<u_long>(size);
+-#else // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
++#elif defined(__SUNPRO_CC)
++  b.iov_base = static_cast<char*>(data);
++  b.iov_len = size;
++#else // defined(__SUNPRO_CC)
+   b.iov_base = data;
+   b.iov_len = size;
+ #endif // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
+@@ -208,7 +211,10 @@
+ #if defined(BOOST_WINDOWS) || defined(__CYGWIN__)
+   b.buf = static_cast<char*>(const_cast<void*>(data));
+   b.len = static_cast<u_long>(size);
+-#else // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
++#elif defined(__SUNPRO_CC)
++  b.iov_base = static_cast<char*>(const_cast<void*>(data));
++  b.iov_len = size;
++#else // defined(__SUNPRO_CC)
+   b.iov_base = const_cast<void*>(data);
+   b.iov_len = size;
+ #endif // defined(BOOST_WINDOWS) || defined(__CYGWIN__)
+--- deluge-torrent-0.5.9.1-orig/libtorrent/include/libtorrent/asio/impl/error_code.ipp	2008-05-11 23:55:16.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/include/libtorrent/asio/impl/error_code.ipp	2008-06-19 16:36:05.998828118 +0000
+@@ -83,16 +83,16 @@
+   if (category() != error::get_system_category())
+     return "asio error";
+ #if defined(__sun) || defined(__QNX__)
+-  return strerror(value_);
++  return std::strerror(value_);
+ #elif defined(__MACH__) && defined(__APPLE__) \
+ || defined(__NetBSD__) || defined(__FreeBSD__) || defined(__OpenBSD__) \
+ || defined(_AIX) || defined(__hpux) || defined(__osf__)
+   char buf[256] = "";
+-  strerror_r(value_, buf, sizeof(buf));
++  std::strerror_r(value_, buf, sizeof(buf));
+   return buf;
+ #else
+   char buf[256] = "";
+-  return strerror_r(value_, buf, sizeof(buf));
++  std::return strerror_r(value_, buf, sizeof(buf));
+ #endif
+ #endif // defined(BOOST_WINDOWS)
+ }
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/http_stream.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/http_stream.cpp	2008-06-19 16:36:05.999064910 +0000
+@@ -130,7 +130,7 @@
+ 		if (found_end)
+ 		{
+ 			m_buffer.push_back(0);
+-			char* status = strchr(&m_buffer[0], ' ');
++			char* status = std::strchr(&m_buffer[0], ' ');
+ 			if (status == 0)
+ 			{
+ 				(*h)(asio::error::operation_not_supported);
+@@ -139,7 +139,7 @@
+ 			}
+ 
+ 			status++;
+-			int code = atoi(status);
++			int code = std::atoi(status);
+ 			if (code != 200)
+ 			{
+ 				(*h)(asio::error::operation_not_supported);
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/piece_picker.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/piece_picker.cpp	2008-06-19 16:36:05.999930124 +0000
+@@ -536,7 +536,7 @@
+ 		{
+ 			// find a random position in the destination vector where we will place
+ 			// this entry.
+-			int dst_index = rand() % m_piece_info[priority].size();
++			int dst_index = std::rand() % m_piece_info[priority].size();
+ 			
+ 			// copy the entry at that position to the back
+ 			m_piece_map[m_piece_info[priority][dst_index]].index
+@@ -608,7 +608,7 @@
+ 		{
+ 			// find a random position in the destination vector where we will place
+ 			// this entry.
+-			int dst_index = rand() % m_piece_info[new_priority].size();
++			int dst_index = std::rand() % m_piece_info[new_priority].size();
+ 			
+ 			// copy the entry at that position to the back
+ 			m_piece_map[m_piece_info[new_priority][dst_index]].index
+@@ -1189,7 +1189,7 @@
+ 			// we're not using rarest first (only for the first
+ 			// bucket, since that's where the currently downloading
+ 			// pieces are)
+-			int start_piece = rand() % m_piece_map.size();
++			int start_piece = std::rand() % m_piece_map.size();
+ 
+ 			// if we have suggested pieces, try to find one of those instead
+ 			for (std::vector<int>::const_iterator i = suggested_pieces.begin()
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/session.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/session.cpp	2008-06-19 16:36:06.004093093 +0000
+@@ -77,7 +77,6 @@
+ using boost::shared_ptr;
+ using boost::weak_ptr;
+ using boost::bind;
+-using boost::mutex;
+ using libtorrent::aux::session_impl;
+ 
+ namespace libtorrent
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/session_impl.cpp	2008-05-18 22:37:11.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/session_impl.cpp	2008-06-19 16:36:06.005696187 +0000
+@@ -98,7 +98,6 @@
+ using boost::shared_ptr;
+ using boost::weak_ptr;
+ using boost::bind;
+-using boost::mutex;
+ using libtorrent::aux::session_impl;
+ 
+ namespace libtorrent {
+@@ -208,7 +207,7 @@
+ #endif
+ 					}
+ 
+-					mutex::scoped_lock l2(m_mutex);
++                                        boost::mutex::scoped_lock l2(m_mutex);
+ 
+ 					if (m_torrents.empty() || m_torrents.front() != t)
+ 					{
+@@ -296,7 +295,7 @@
+ 				// This will happen if the storage fails to initialize
+ 				// for example if one of the files has an invalid filename.
+ 				session_impl::mutex_t::scoped_lock l(m_ses.m_mutex);
+-				mutex::scoped_lock l2(m_mutex);
++                                boost::mutex::scoped_lock l2(m_mutex);
+ 
+ 				if (m_ses.m_alerts.should_post(alert::fatal))
+ 				{
+@@ -315,7 +314,7 @@
+ #ifndef NDEBUG
+ 				std::cerr << "error while checking resume data\n";
+ #endif
+-				mutex::scoped_lock l(m_mutex);
++                                boost::mutex::scoped_lock l(m_mutex);
+ 				TORRENT_ASSERT(!m_torrents.empty());
+ 				m_torrents.pop_front();
+ 				TORRENT_ASSERT(false);
+@@ -332,7 +331,7 @@
+ 				boost::tie(finished, progress) = processing->torrent_ptr->check_files();
+ 
+ 				{
+-					mutex::scoped_lock l2(m_mutex);
++					boost::mutex::scoped_lock l2(m_mutex);
+ 
+ 					INVARIANT_CHECK;
+ 
+@@ -362,7 +361,7 @@
+ 				{
+ 					// lock the session to add the new torrent
+ 					session_impl::mutex_t::scoped_lock l(m_ses.m_mutex);
+-					mutex::scoped_lock l2(m_mutex);
++                                        boost::mutex::scoped_lock l2(m_mutex);
+ 
+ 					INVARIANT_CHECK;
+ 
+@@ -425,7 +424,7 @@
+ 			{
+ 				// This will happen if the storage fails to initialize
+ 				session_impl::mutex_t::scoped_lock l(m_ses.m_mutex);
+-				mutex::scoped_lock l2(m_mutex);
++                                boost::mutex::scoped_lock l2(m_mutex);
+ 
+ 				if (m_ses.m_alerts.should_post(alert::fatal))
+ 				{
+@@ -452,7 +451,7 @@
+ #ifndef NDEBUG
+ 				std::cerr << "error while checking files\n";
+ #endif
+-				mutex::scoped_lock l(m_mutex);
++                                boost::mutex::scoped_lock l(m_mutex);
+ 				TORRENT_ASSERT(!m_processing.empty());
+ 
+ 				processing.reset();
+@@ -764,7 +763,7 @@
+ 		m_download_channel.close();
+ 		m_upload_channel.close();
+ 
+-		mutex::scoped_lock l2(m_checker_impl.m_mutex);
++		boost::mutex::scoped_lock l2(m_checker_impl.m_mutex);
+ 		// abort the checker thread
+ 		m_checker_impl.m_abort = true;
+ 
+@@ -1669,7 +1668,7 @@
+ 	std::vector<torrent_handle> session_impl::get_torrents()
+ 	{
+ 		mutex_t::scoped_lock l(m_mutex);
+-		mutex::scoped_lock l2(m_checker_impl.m_mutex);
++                boost::mutex::scoped_lock l2(m_checker_impl.m_mutex);
+ 		std::vector<torrent_handle> ret;
+ 		for (std::deque<boost::shared_ptr<aux::piece_checker_data> >::iterator i
+ 			= m_checker_impl.m_torrents.begin()
+@@ -1721,7 +1720,7 @@
+ 
+ 		// lock the session and the checker thread (the order is important!)
+ 		mutex_t::scoped_lock l(m_mutex);
+-		mutex::scoped_lock l2(m_checker_impl.m_mutex);
++                boost::mutex::scoped_lock l2(m_checker_impl.m_mutex);
+ 
+ //		INVARIANT_CHECK;
+ 
+@@ -1797,7 +1796,7 @@
+ 		TORRENT_ASSERT(!save_path.empty());
+ 		{
+ 			// lock the checker_thread
+-			mutex::scoped_lock l(m_checker_impl.m_mutex);
++			boost::mutex::scoped_lock l(m_checker_impl.m_mutex);
+ 
+ 			// is the torrent currently being checked?
+ 			if (m_checker_impl.find_torrent(info_hash))
+@@ -1896,7 +1895,7 @@
+ 
+ 		if (h.m_chk)
+ 		{
+-			mutex::scoped_lock l(m_checker_impl.m_mutex);
++			boost::mutex::scoped_lock l(m_checker_impl.m_mutex);
+ 
+ 			aux::piece_checker_data* d = m_checker_impl.find_torrent(h.m_info_hash);
+ 			if (d != 0)
+@@ -2208,7 +2207,7 @@
+ 		// destructed and then the invariant will be broken).
+ 
+ 		{
+-			mutex::scoped_lock l(m_checker_impl.m_mutex);
++			boost::mutex::scoped_lock l(m_checker_impl.m_mutex);
+ 			// abort the checker thread
+ 			m_checker_impl.m_abort = true;
+ 
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/sha1.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/sha1.cpp	2008-06-19 16:36:06.006271345 +0000
+@@ -20,20 +20,19 @@
+ // #include <stdint.h>
+ 
+ #include <boost/cstdint.hpp>
+-using boost::uint32_t;
+ using boost::uint8_t;
+ 
+ #include "libtorrent/config.hpp"
+ 
+ struct TORRENT_EXPORT SHA_CTX
+ {
+-	uint32_t state[5];
+-	uint32_t count[2];
++	boost::uint32_t state[5];
++	boost::uint32_t count[2];
+ 	uint8_t buffer[64];
+ };
+ 
+ TORRENT_EXPORT void SHA1_Init(SHA_CTX* context);
+-TORRENT_EXPORT void SHA1_Update(SHA_CTX* context, uint8_t const* data, uint32_t len);
++TORRENT_EXPORT void SHA1_Update(SHA_CTX* context, uint8_t const* data, boost::uint32_t len);
+ TORRENT_EXPORT void SHA1_Final(uint8_t* digest, SHA_CTX* context);
+ 
+ namespace
+@@ -41,7 +40,7 @@
+ 	union CHAR64LONG16
+ 	{
+ 		uint8_t c[64];
+-		uint32_t l[16];
++		boost::uint32_t l[16];
+ 	};
+ 
+ #define rol(value, bits) (((value) << (bits)) | ((value) >> (32 - (bits))))
+@@ -50,7 +49,7 @@
+ // I got the idea of expanding during the round function from SSLeay
+ 	struct little_endian_blk0
+ 	{
+-		static uint32_t apply(CHAR64LONG16* block, int i)
++		static boost::uint32_t apply(CHAR64LONG16* block, int i)
+ 		{
+ 			return block->l[i] = (rol(block->l[i],24)&0xFF00FF00)
+ 				| (rol(block->l[i],8)&0x00FF00FF);
+@@ -59,7 +58,7 @@
+ 
+ 	struct big_endian_blk0
+ 	{
+-		static uint32_t apply(CHAR64LONG16* block, int i)
++		static boost::uint32_t apply(CHAR64LONG16* block, int i)
+ 		{
+ 			return  block->l[i];
+ 		}
+@@ -78,10 +77,10 @@
+ 
+ 	// Hash a single 512-bit block. This is the core of the algorithm.
+ 	template <class BlkFun>
+-	void SHA1Transform(uint32_t state[5], uint8_t const buffer[64])
++	void SHA1Transform(boost::uint32_t state[5], uint8_t const buffer[64])
+ 	{
+ 		using namespace std;
+-		uint32_t a, b, c, d, e;
++		boost::uint32_t a, b, c, d, e;
+ 
+ 		CHAR64LONG16* block;
+ 		uint8_t workspace[64];
+@@ -136,10 +135,10 @@
+ 	}
+ 
+ 	template <class BlkFun>
+-	void internal_update(SHA_CTX* context, uint8_t const* data, uint32_t len)
++	void internal_update(SHA_CTX* context, uint8_t const* data, boost::uint32_t len)
+ 	{
+ 		using namespace std;
+-		uint32_t i, j;	// JHB
++		boost::uint32_t i, j;	// JHB
+ 
+ #ifdef VERBOSE
+ 		SHAPrintContext(context, "before");
+@@ -169,7 +168,7 @@
+ 
+ 	bool is_big_endian()
+ 	{
+-		uint32_t test = 1;
++		boost::uint32_t test = 1;
+ 		return *reinterpret_cast<uint8_t*>(&test) == 0;
+ 	}
+ }
+@@ -190,7 +189,7 @@
+ 
+ // Run your data through this.
+ 
+-void SHA1_Update(SHA_CTX* context, uint8_t const* data, uint32_t len)
++void SHA1_Update(SHA_CTX* context, uint8_t const* data, boost::uint32_t len)
+ {
+ #if defined __BIG_ENDIAN__
+ 	internal_update<big_endian_blk0>(context, data, len);
+@@ -213,7 +212,7 @@
+ {
+ 	uint8_t finalcount[8];
+ 
+-	for (uint32_t i = 0; i < 8; ++i)
++	for (boost::uint32_t i = 0; i < 8; ++i)
+ 	{
+ 		// Endian independent
+ 		finalcount[i] = static_cast<uint8_t>(
+@@ -226,7 +225,7 @@
+ 		SHA1_Update(context, (uint8_t const*)"\0", 1);
+ 	SHA1_Update(context, finalcount, 8);  // Should cause a SHA1Transform()
+ 
+-	for (uint32_t i = 0; i < 20; ++i)
++	for (boost::uint32_t i = 0; i < 20; ++i)
+ 	{
+ 		digest[i] = static_cast<unsigned char>(
+ 			(context->state[i>>2] >> ((3-(i & 3)) * 8) ) & 255);
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/torrent.cpp	2008-05-18 22:37:11.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/torrent.cpp	2008-06-19 16:36:06.007867564 +0000
+@@ -79,7 +79,6 @@
+ using boost::tuples::get;
+ using boost::tuples::make_tuple;
+ using boost::bind;
+-using boost::mutex;
+ using libtorrent::aux::session_impl;
+ 
+ namespace
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/torrent_handle.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/torrent_handle.cpp	2008-06-19 16:39:15.955003859 +0000
+@@ -75,7 +75,6 @@
+ #endif
+ 
+ using boost::bind;
+-using boost::mutex;
+ using libtorrent::aux::session_impl;
+ 
+ #ifdef BOOST_NO_EXCEPTIONS
+@@ -84,7 +83,7 @@
+ 	if (m_ses == 0) return; \
+ 	TORRENT_ASSERT(m_chk); \
+ 	session_impl::mutex_t::scoped_lock l1(m_ses->m_mutex); \
+-	mutex::scoped_lock l2(m_chk->m_mutex); \
++	boost::mutex::scoped_lock l2(m_chk->m_mutex); \
+ 	torrent* t = find_torrent(m_ses, m_chk, m_info_hash); \
+ 	if (t == 0) return; \
+ 	t->call
+@@ -93,7 +92,7 @@
+ 	if (m_ses == 0) return def; \
+ 	TORRENT_ASSERT(m_chk); \
+ 	session_impl::mutex_t::scoped_lock l1(m_ses->m_mutex); \
+-	mutex::scoped_lock l2(m_chk->m_mutex); \
++	boost::mutex::scoped_lock l2(m_chk->m_mutex); \
+ 	torrent* t = find_torrent(m_ses, m_chk, m_info_hash); \
+ 	if (t == 0) return def; \
+ 	return t->call
+@@ -102,7 +101,7 @@
+ 	if (m_ses == 0) return def; \
+ 	TORRENT_ASSERT(m_chk); \
+ 	session_impl::mutex_t::scoped_lock l1(m_ses->m_mutex); \
+-	mutex::scoped_lock l2(m_chk->m_mutex); \
++	boost::mutex::scoped_lock l2(m_chk->m_mutex); \
+ 	torrent* t = find_torrent(m_ses, m_chk, m_info_hash); \
+ 	if (t == 0) return def; \
+ 	t->call
+@@ -113,7 +112,7 @@
+ 	if (m_ses == 0) throw_invalid_handle(); \
+ 	TORRENT_ASSERT(m_chk); \
+ 	session_impl::mutex_t::scoped_lock l1(m_ses->m_mutex); \
+-	mutex::scoped_lock l2(m_chk->m_mutex); \
++	boost::mutex::scoped_lock l2(m_chk->m_mutex); \
+ 	torrent* t = find_torrent(m_ses, m_chk, m_info_hash); \
+ 	if (t == 0) throw_invalid_handle(); \
+ 	t->call
+@@ -122,7 +121,7 @@
+ 	if (m_ses == 0) throw_invalid_handle(); \
+ 	TORRENT_ASSERT(m_chk); \
+ 	session_impl::mutex_t::scoped_lock l1(m_ses->m_mutex); \
+-	mutex::scoped_lock l2(m_chk->m_mutex); \
++	boost::mutex::scoped_lock l2(m_chk->m_mutex); \
+ 	torrent* t = find_torrent(m_ses, m_chk, m_info_hash); \
+ 	if (t == 0) return def; \
+ 	return t->call
+@@ -131,7 +130,7 @@
+ 	if (m_ses == 0) throw_invalid_handle(); \
+ 	TORRENT_ASSERT(m_chk); \
+ 	session_impl::mutex_t::scoped_lock l1(m_ses->m_mutex); \
+-	mutex::scoped_lock l2(m_chk->m_mutex); \
++	boost::mutex::scoped_lock l2(m_chk->m_mutex); \
+ 	torrent* t = find_torrent(m_ses, m_chk, m_info_hash); \
+ 	if (t == 0) return def; \
+ 	t->call
+@@ -311,7 +310,7 @@
+ 		TORRENT_ASSERT(m_chk);
+ 	
+ 		session_impl::mutex_t::scoped_lock l(m_ses->m_mutex);
+-		mutex::scoped_lock l2(m_chk->m_mutex);
++		boost::mutex::scoped_lock l2(m_chk->m_mutex);
+ 
+ 		aux::piece_checker_data* d = m_chk->find_torrent(m_info_hash);
+ 		if (d != 0)
+@@ -472,7 +471,7 @@
+ #endif
+ 		TORRENT_ASSERT(m_chk);
+ 		session_impl::mutex_t::scoped_lock l1(m_ses->m_mutex);
+-		mutex::scoped_lock l2(m_chk->m_mutex);
++		boost::mutex::scoped_lock l2(m_chk->m_mutex);
+ 		torrent* t = find_torrent(m_ses, m_chk, m_info_hash);
+ 		if (t == 0 || !t->valid_metadata())
+ #ifdef BOOST_NO_EXCEPTIONS
+@@ -489,7 +488,7 @@
+ 		if (m_ses == 0) return false;
+ 		TORRENT_ASSERT(m_chk);
+ 		session_impl::mutex_t::scoped_lock l1(m_ses->m_mutex);
+-		mutex::scoped_lock l2(m_chk->m_mutex);
++                boost::mutex::scoped_lock l2(m_chk->m_mutex);
+ 		torrent* t = find_torrent(m_ses, m_chk, m_info_hash);
+ 		return t != 0;
+ 	}
+@@ -507,7 +506,7 @@
+ 		TORRENT_ASSERT(m_chk);
+ 
+ 		session_impl::mutex_t::scoped_lock l(m_ses->m_mutex);
+-		mutex::scoped_lock l2(m_chk->m_mutex);
++		boost::mutex::scoped_lock l2(m_chk->m_mutex);
+ 
+ 		torrent* t = find_torrent(m_ses, m_chk, m_info_hash);
+ 		if (!t || !t->valid_metadata())
+@@ -670,7 +669,7 @@
+ 			// the torrent is being checked. Add the peer to its
+ 			// peer list. The entries in there will be connected
+ 			// once the checking is complete.
+-			mutex::scoped_lock l2(m_chk->m_mutex);
++			boost::mutex::scoped_lock l2(m_chk->m_mutex);
+ 
+ 			aux::piece_checker_data* d = m_chk->find_torrent(m_info_hash);
+ 			if (d == 0)
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/udp_tracker_connection.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/udp_tracker_connection.cpp	2008-06-19 16:36:06.009208730 +0000
+@@ -187,7 +187,7 @@
+ 		char* ptr = send_buf;
+ 
+ 		if (m_transaction_id == 0)
+-			m_transaction_id = rand() ^ (rand() << 16);
++			m_transaction_id = std::rand() ^ (std::rand() << 16);
+ 
+ 		// connection_id
+ 		detail::write_uint32(0x417, ptr);
+@@ -292,7 +292,7 @@
+ 	void udp_tracker_connection::send_udp_announce()
+ 	{
+ 		if (m_transaction_id == 0)
+-			m_transaction_id = rand() ^ (rand() << 16);
++			m_transaction_id = std::rand() ^ (std::rand() << 16);
+ 
+ 		if (!m_socket.is_open()) return; // the operation was aborted
+ 
+@@ -352,7 +352,7 @@
+ 	void udp_tracker_connection::send_udp_scrape()
+ 	{
+ 		if (m_transaction_id == 0)
+-			m_transaction_id = rand() ^ (rand() << 16);
++			m_transaction_id = std::rand() ^ (std::rand() << 16);
+ 
+ 		if (!m_socket.is_open()) return; // the operation was aborted
+ 
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/upnp.cpp	2008-05-18 22:36:37.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/upnp.cpp	2008-06-19 16:36:06.009774227 +0000
+@@ -642,14 +642,14 @@
+ 		if (type == xml_start_tag)
+ 		{
+ 			if ((!state.top_tag.empty() && state.top_tag == "service")
+-				|| !strcmp(string, "service"))
++				|| !std::strcmp(string, "service"))
+ 			{
+ 				state.top_tag = string;
+ 			}
+ 		}
+ 		else if (type == xml_end_tag)
+ 		{
+-			if (!strcmp(string, "service"))
++			if (!std::strcmp(string, "service"))
+ 			{
+ 				state.top_tag.clear();
+ 				if (state.found_service) state.exit = true;
+@@ -661,7 +661,7 @@
+ 		{
+ 			if (state.top_tag == "serviceType")
+ 			{
+-				if (!strcmp(string, state.service_type))
++				if (!std::strcmp(string, state.service_type))
+ 					state.found_service = true;
+ 			}
+ 			else if (state.top_tag == "controlURL")
+@@ -783,7 +783,7 @@
+ 	void find_error_code(int type, char const* string, error_code_parse_state& state)
+ 	{
+ 		if (state.exit) return;
+-		if (type == xml_start_tag && !strcmp("errorCode", string))
++		if (type == xml_start_tag && !std::strcmp("errorCode", string))
+ 		{
+ 			state.in_error_code = true;
+ 		}
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/kademlia/node.cpp	2008-05-18 22:12:22.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/kademlia/node.cpp	2008-06-19 16:36:06.010181163 +0000
+@@ -428,7 +428,7 @@
+ 	int num = (std::min)((int)v.peers.size(), m_settings.max_peers_reply);
+ 	peers.clear();
+ 	peers.reserve(num);
+-	random_sample_n(boost::make_transform_iterator(v.peers.begin(), &get_endpoint)
++	std::random_sample_n(boost::make_transform_iterator(v.peers.begin(), &get_endpoint)
+ 		, boost::make_transform_iterator(v.peers.end(), &get_endpoint)
+ 		, std::back_inserter(peers), num);
+ 
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/kademlia/rpc_manager.cpp	2008-05-18 22:12:22.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/kademlia/rpc_manager.cpp	2008-06-19 16:36:06.010485270 +0000
+@@ -82,7 +82,7 @@
+ 	if (--o->m_refs == 0)
+ 	{
+ 		boost::pool<>& p = o->pool_allocator;
+-		o->~observer();
++		(const_cast<observer*>(o))->~observer();
+ 		p.free(const_cast<observer*>(o));
+ 	}
+ }
+@@ -106,7 +106,7 @@
+ rpc_manager::rpc_manager(fun const& f, node_id const& our_id
+ 	, routing_table& table, send_fun const& sf)
+ 	: m_pool_allocator(sizeof(mpl::deref<max_observer_type_iter::base>::type))
+-	, m_next_transaction_id(rand() % max_transactions)
++	, m_next_transaction_id(std::rand() % max_transactions)
+ 	, m_oldest_transaction_id(m_next_transaction_id)
+ 	, m_incoming(f)
+ 	, m_send(sf)
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/web_peer_connection.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/web_peer_connection.cpp	2008-06-19 16:36:06.010826061 +0000
+@@ -467,7 +467,7 @@
+ 			else
+ 			{
+ 				range_start = 0;
+-				range_end = atol(m_parser.header("content-length").c_str());
++				range_end = std::atol(m_parser.header("content-length").c_str());
+ 				if (range_end == -1)
+ 				{
+ 					// we should not try this server again.
+--- deluge-torrent-0.5.9.1-orig/libtorrent/include/libtorrent/asio/detail/resolver_service.hpp	2008-05-11 23:55:17.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/include/libtorrent/asio/detail/resolver_service.hpp	2008-06-19 16:36:06.011108335 +0000
+@@ -329,7 +329,7 @@
+   void start_work_thread()
+   {
+     asio::detail::mutex::scoped_lock lock(mutex_);
+-    if (work_thread_ == 0)
++    if (work_thread_.get() == 0)
+     {
+       work_thread_.reset(new asio::detail::thread(
+             work_io_service_runner(*work_io_service_)));
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/lsd.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/lsd.cpp	2008-06-19 16:36:06.011324195 +0000
+@@ -166,7 +166,7 @@
+ 	sha1_hash ih(0);
+ 	std::istringstream ih_sstr(ih_str);
+ 	ih_sstr >> ih;
+-	int port = atoi(port_str.c_str());
++	int port = std::atoi(port_str.c_str());
+ 
+ 	if (!ih.is_all_zeros() && port != 0)
+ 	{
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/http_tracker_connection.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/http_tracker_connection.cpp	2008-06-19 16:36:06.011841503 +0000
+@@ -705,7 +705,7 @@
+ 
+ 		if (m_parser.header_finished())
+ 		{
+-			int cl = atoi(m_parser.header("content-length").c_str());
++			int cl = std::atoi(m_parser.header("content-length").c_str());
+ 			if (cl > m_settings.tracker_maximum_response_length)
+ 			{
+ 				fail(-1, "content-length is greater than maximum response length");
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/enum_net.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/enum_net.cpp	2008-06-19 16:36:06.012071925 +0000
+@@ -31,6 +31,7 @@
+ */
+ 
+ #include "libtorrent/config.hpp"
++#include "asio/ip/host_name.hpp"
+ 
+ #if defined TORRENT_BSD || defined TORRENT_LINUX
+ #include <sys/ioctl.h>
+--- deluge-torrent-0.5.9.1-orig/libtorrent/src/identify_client.cpp	2008-05-18 22:12:25.000000000 +0000
++++ deluge-torrent-0.5.9.1/libtorrent/src/identify_client.cpp	2008-06-19 16:36:06.012336233 +0000
+@@ -34,6 +34,7 @@
+ 
+ #include <cctype>
+ #include <algorithm>
++#include <stdio.h>
+ 
+ #ifdef _MSC_VER
+ #pragma warning(push, 1)

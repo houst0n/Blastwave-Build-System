@@ -1,0 +1,37 @@
+--- wildmidi-0.2.3.4/configure	Sun Dec 26 11:07:42 2010
++++ wildmidi-0.2.3.4-patch/configure	Sun Dec 26 11:08:04 2010
+@@ -11155,7 +11155,6 @@
+  esac
+ 
+ 
+-CFLAGS="$CFLAGS -Wall -Wextra -pedantic"
+ LDFLAGS=
+ 
+ 
+@@ -11359,26 +11358,7 @@
+ fi
+ 
+ 
+-case "$arch" in
+-    no)
+-        ;;
+-	auto)
+-		case "${host_cpu}" in
+-			i?86)
+-				if test "x$HAVE_AMD" = "xyes"; then
+-					CFLAGS="$CFLAGS -march=k6"
+-				else
+-					CFLAGS="$CFLAGS -march=${host_cpu}"
+-				fi
+-				;;
+-		esac
+-		;;
+-	*)
+-		CFLAGS="$CFLAGS -march=$arch"
+-		;;
+ 
+-esac
+-
+ case "$host_os" in
+         *mingw*)
+                 AUDDR="-lwinmm"

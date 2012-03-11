@@ -1,0 +1,127 @@
+--- gjs/gjs-dbus/dbus.c-orig	2009-07-07 10:15:25.363639000 -0500
++++ gjs/gjs-dbus/dbus.c	2009-07-07 10:18:08.124492000 -0500
+@@ -1609,7 +1609,7 @@ typedef struct {
+     /* strict aliasing rules require us to relate the 'gobj' field to a
+      * void * type here, in order to be able to pass it to
+      * g_object_*_weak_pointer (which takes a void **) */
+-    union { GObject *gobj; void *weak_ptr; };
++    union { GObject *gobj; void *weak_ptr; } gobj;
+     char *iface_name;
+ } GjsDBusGObject;
+ 
+@@ -1621,9 +1621,9 @@ gobj_path_unregistered(DBusConnection  *
+ 
+     g = user_data;
+ 
+-    if (g->gobj) {
+-        g_object_remove_weak_pointer(g->gobj, &g->weak_ptr /* aka, gobj */);
+-        g->gobj = NULL;
++    if (g->gobj.gobj) {
++        g_object_remove_weak_pointer(g->gobj.gobj, &g->gobj.weak_ptr /* aka, gobj */);
++        g->gobj.gobj = NULL;
+     }
+ 
+     g_free(g->iface_name);
+@@ -1649,9 +1649,9 @@ gobj_path_message(DBusConnection  *conne
+     g = user_data;
+ 
+     gjs_debug(GJS_DEBUG_DBUS, "Received message to iface %s gobj %p",
+-            g->iface_name, g->gobj);
++            g->iface_name, g->gobj.gobj);
+ 
+-    if (g->gobj == NULL) {
++    if (g->gobj.gobj == NULL) {
+         /* GObject was destroyed */
+         return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+     }
+@@ -1728,12 +1728,12 @@ gobj_path_message(DBusConnection  *conne
+                                          DBUS_TYPE_ARRAY, "{sv}",
+                                          &out_dict_iter);
+ 
+-        g_object_ref(g->gobj);
++        g_object_ref(g->gobj.gobj);
+         (* method->sync_func) (connection, message,
+                                &dict_iter, &out_dict_iter,
+-                               g->gobj,
++                               g->gobj.gobj,
+                                &derror);
+-        g_object_unref(g->gobj);
++        g_object_unref(g->gobj.gobj);
+ 
+         dbus_message_iter_close_container(&out_arg_iter, &out_dict_iter);
+ 
+@@ -1743,11 +1743,11 @@ gobj_path_message(DBusConnection  *conne
+         dbus_message_unref(reply);
+ 
+     } else if (method->async_func != NULL) {
+-        g_object_ref(g->gobj);
++        g_object_ref(g->gobj.gobj);
+         (* method->async_func) (connection, message,
+                                 &dict_iter,
+-                                g->gobj);
+-        g_object_unref(g->gobj);
++                                g->gobj.gobj);
++        g_object_unref(g->gobj.gobj);
+     } else {
+         g_warning("Method %s does not have any implementation", method->name);
+     }
+@@ -1796,14 +1796,14 @@ gjs_dbus_register_g_object(DBusConnectio
+ 
+     g = g_slice_new0(GjsDBusGObject);
+     g->iface_name = g_strdup(iface_name);
+-    g->gobj = gobj;
++    g->gobj.gobj = gobj;
+ 
+     if (!dbus_connection_register_object_path(connection, path,
+                                               &gobj_vtable, g)) {
+         g_warning("Failed to register object path %s", path);
+     }
+ 
+-    g_object_add_weak_pointer(g->gobj, &g->weak_ptr /* aka, gobj */);
++    g_object_add_weak_pointer(g->gobj.gobj, &g->gobj.weak_ptr /* aka, gobj */);
+ }
+ 
+ void
+--- gjs-0.6/Makefile.am-orig	2010-04-27 05:04:19.043692872 -0500
++++ gjs-0.6/Makefile.am	2010-04-27 05:04:25.898641234 -0500
+@@ -89,8 +89,7 @@ libgjs_la_CFLAGS = 		\
+ 	$(AM_CFLAGS)
+ libgjs_la_LDFLAGS = 		\
+ 	-export-symbols-regex "^[^_]" -version-info 0:0:0	\
+-	-no-undefined \
+-	-rdynamic
++	-no-undefined
+ if HAVE_FIREFOX_JS_LIBDIR
+ libgjs_la_LDFLAGS += -R $(FIREFOX_JS_LIBDIR) 
+ endif
+@@ -179,7 +178,7 @@ gjs_console_LDADD =		\
+ 	$(JS_LIBS)		\
+ 	$(GOBJECT_LIBS)		\
+ 	libgjs.la
+-gjs_console_LDFLAGS = -rdynamic
++gjs_console_LDFLAGS =
+ if HAVE_FIREFOX_JS_LIBDIR
+ gjs_console_LDFLAGS += -R $(FIREFOX_JS_LIBDIR)
+ endif
+--- gjs-0.7/gjs/native.h        2010-04-18 02:55:15.000000000 +0200
++++ gjs-0.7-sunpro/gjs/native.h 2010-05-26 14:29:17.761796993 +0200
+@@ -65,8 +65,18 @@
+ typedef JSBool (* GjsDefineModuleFunc) (JSContext *context,
+                                         JSObject  *module_obj);
+ 
++#ifdef __GNUC__
++#define INIT __attribute__((constructor))
++#elif __SUNPRO_C
++#define Pragma(x) _Pragma(#x)
++#define INIT Pragma(init(register_native_module))
++#else
++Initialization routine in a dynamic object not defined for current compiler
++#endif
++
+ #define GJS_REGISTER_NATIVE_MODULE_WITH_FLAGS(module_id_string, module_func, flags) \
+-    __attribute__((constructor)) static void                                 \
++    INIT                                            \
++    static void                                                                     \
+     register_native_module (void)                                            \
+     {                                                                        \
+         gjs_register_native_module(module_id_string, module_func, flags); \

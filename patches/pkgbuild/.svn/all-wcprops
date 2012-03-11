@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/pkgbuild/!svn/ver/3417/spec-files-extra/trunk/patches/pkgbuild
+END
+pkgbuild-local.diff
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/pkgbuild/!svn/ver/3403/spec-files-extra/trunk/patches/pkgbuild/pkgbuild-local.diff
+END
+pkgbuild-postprocess-debug-separate.diff
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svnroot/pkgbuild/!svn/ver/3403/spec-files-extra/trunk/patches/pkgbuild/pkgbuild-postprocess-debug-separate.diff
+END
+pkgbuild-01-add-unknown-dependencies.patch
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svnroot/pkgbuild/!svn/ver/3417/spec-files-extra/trunk/patches/pkgbuild/pkgbuild-01-add-unknown-dependencies.patch
+END
+pkgbuild-03-forcefully-copy-docs.patch
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/pkgbuild/!svn/ver/3417/spec-files-extra/trunk/patches/pkgbuild/pkgbuild-03-forcefully-copy-docs.patch
+END
+pkgbuild-04-patchdir.diff
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/pkgbuild/!svn/ver/3417/spec-files-extra/trunk/patches/pkgbuild/pkgbuild-04-patchdir.diff
+END
+pkgbuild-05-xz.diff
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/pkgbuild/!svn/ver/3417/spec-files-extra/trunk/patches/pkgbuild/pkgbuild-05-xz.diff
+END
+pkgbuild-02-nopkg.patch
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/pkgbuild/!svn/ver/3417/spec-files-extra/trunk/patches/pkgbuild/pkgbuild-02-nopkg.patch
+END

@@ -1,0 +1,22 @@
+--- webkit-1.2.7/JavaScriptCore/runtime/SmallStrings.cpp	Fri Sep 10 15:20:23 2010
++++ webkit-1.2.7-patch/JavaScriptCore/runtime/SmallStrings.cpp	Sat Mar 19 23:30:22 2011
+@@ -61,7 +61,7 @@
+ 
+ SmallStrings::SmallStrings()
+ {
+-    COMPILE_ASSERT(numCharactersToStore == arrayLength(m_singleCharacterStrings), IsNumCharactersConstInSyncWithClassUsage);
++    //COMPILE_ASSERT(numCharactersToStore == arrayLength(m_singleCharacterStrings), IsNumCharactersConstInSyncWithClassUsage);
+     clear();
+ }
+ 
+--- webkit-1.2.7/JavaScriptCore/wtf/Vector.h	Fri Sep 10 15:20:23 2010
++++ webkit-1.2.7-patch/JavaScriptCore/wtf/Vector.h	Sat Mar 19 23:30:22 2011
+@@ -948,7 +964,7 @@
+         // one is needed. 
+         new (end()) T(static_cast<T>(*ptr));
+ #else
+-        new (end()) T(*ptr);
++	new (end()) T(*(T*)ptr);
+ #endif
+         ++m_size;
+     }

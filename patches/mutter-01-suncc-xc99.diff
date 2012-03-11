@@ -1,0 +1,13 @@
+diff --git a/configure.in b/configure.in
+index b843a68..660c7fc 100644
+--- a/configure.in
++++ b/configure.in
+@@ -504,6 +504,8 @@ if test "$enable_compile_warnings" != no
+ fi
+ changequote([,])dnl
+ 
++CFLAGS="$CFLAGS -xc99"
++
+ AC_CONFIG_FILES([
+ Makefile
+ doc/Makefile

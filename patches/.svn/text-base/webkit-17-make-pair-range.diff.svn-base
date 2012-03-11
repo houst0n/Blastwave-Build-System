@@ -1,0 +1,11 @@
+--- webkit-1.2.7/WebCore/svg/SVGFontElement.cpp	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/svg/SVGFontElement.cpp	Sat Mar 19 23:15:17 2011
+@@ -182,7 +182,7 @@
+             UChar character = remainingCharacters[0];
+             if (character == ',')
+                 return false;
+-            ranges.append(make_pair(character, character));
++            ranges.append(make_pair((unsigned)character, (unsigned)character));
+             ++remainingCharacters;
+             --remainingLength;
+         }

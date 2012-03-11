@@ -1,0 +1,14 @@
+--- hunspell-1.2.14/src/tools/hunspell.cxx.orig	Fri Feb  4 13:54:50 2011
++++ hunspell-1.2.14/src/tools/hunspell.cxx	Fri Feb  4 13:59:09 2011
+@@ -61,10 +61,7 @@
+ #include "firstparser.hxx"
+ 
+ #define LIBDIR \
+-    "/usr/share/hunspell:" \
+-    "/usr/share/myspell:" \
+-    "/usr/share/myspell/dicts:" \
+-    "/Library/Spelling"
++    "/usr/share/spell/myspell:"
+ #define USEROOODIR \
+     ".openoffice.org/3/user/wordbook:" \
+     ".openoffice.org2/user/wordbook:" \

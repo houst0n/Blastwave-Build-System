@@ -5,7 +5,7 @@
 #
 
 %include Solaris.inc
-%include opt-blast.inc
+%include usr-gnu.inc
 
 Name:                    BLASTnano
 Summary:                 GNU nano text editor

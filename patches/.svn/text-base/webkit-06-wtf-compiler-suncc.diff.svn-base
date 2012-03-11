@@ -1,0 +1,13 @@
+--- webkit-1.2.7/JavaScriptCore/wtf/Platform.h	Fri Sep 10 15:20:23 2010
++++ webkit-1.2.7-patch/JavaScriptCore/wtf/Platform.h	Sat Mar 19 23:05:08 2011
+@@ -94,6 +94,10 @@
+ #endif
+ 
+ 
++/* COMPILER(SUNCC) - Sun Studio */
++#if defined(__SUNPRO_C) || defined(__SUNPRO_CC)
++#define WTF_COMPILER_SUNCC 1
++#endif
+ 
+ /* ==== CPU() - the target CPU architecture ==== */
+ 

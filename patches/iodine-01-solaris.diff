@@ -1,0 +1,21 @@
+--- iodine-0.6.0-rc1.orig/src/osflags	2009-06-24 13:28:13.000000000 -0400
++++ iodine-0.6.0-rc1/src/osflags	2011-03-29 01:25:15.558471151 -0400
+@@ -5,7 +5,7 @@
+ 
+ 	case $1 in
+ 		SunOS | solaris)
+-			echo '-lsocket -lnsl';
++			echo '-lsocket -lnsl -lresolv';
+ 		;;
+ 		BeOS)
+ 			echo '-lsocket -lbind -lbsd';
+@@ -23,6 +23,9 @@
+ 	;;
+ cflags)
+ 	case $1 in
++		SunOS | solaris)
++			echo '-D_XOPEN_SOURCE=500 -D__EXTENSIONS__';
++		;;
+ 		BeOS)
+ 			echo '-Dsocklen_t=int';
+ 		;;

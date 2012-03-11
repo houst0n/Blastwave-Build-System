@@ -1,0 +1,65 @@
+--- scim-1.4.7.orig/src/scim_slot.h	2007-10-09 00:42:09.000000000 +0800
++++ scim-1.4.7/src/scim_slot.h	2008-01-04 15:13:42.158361775 +0800
+@@ -149,7 +149,7 @@
+ 
+ template <typename T1, typename T2, typename R>
+ inline Slot0<R>*
+-slot(T1* &object, R (T2::*function)())
++slot(T1* object, R (T2::*function)())
+ {
+     return new MethodSlot0<T2, R>(object, function);
+ }
+@@ -291,7 +291,7 @@
+ 
+ template <typename T1, typename T2, typename R, typename P1>
+ inline Slot1<R, P1>*
+-slot(T1* &object, R (T2::*function)(P1))
++slot(T1* object, R (T2::*function)(P1))
+ {
+     return new MethodSlot1<T2, R, P1>(object, function);
+ }
+@@ -434,7 +434,7 @@
+ 
+ template <typename T1, typename T2, typename R, typename P1, typename P2>
+ inline Slot2<R, P1, P2>*
+-slot(T1* &object, R (T2::*function)(P1, P2))
++slot(T1* object, R (T2::*function)(P1, P2))
+ {
+     return new MethodSlot2<T2, R, P1, P2>(object, function);
+ }
+@@ -577,7 +577,7 @@
+ 
+ template <typename T1, typename T2, typename R, typename P1, typename P2, typename P3>
+ inline Slot3<R, P1, P2, P3>*
+-slot(T1* &object, R (T2::*function)(P1, P2, P3))
++slot(T1* object, R (T2::*function)(P1, P2, P3))
+ {
+     return new MethodSlot3<T2, R, P1, P2, P3>(object, function);
+ }
+@@ -720,7 +720,7 @@
+ 
+ template <typename T1, typename T2, typename R, typename P1, typename P2, typename P3, typename P4>
+ inline Slot4<R, P1, P2, P3, P4>*
+-slot(T1* &object, R (T2::*function)(P1, P2, P3, P4))
++slot(T1* object, R (T2::*function)(P1, P2, P3, P4))
+ {
+     return new MethodSlot4<T2, R, P1, P2, P3, P4>(object, function);
+ }
+@@ -862,7 +862,7 @@
+ 
+ template <typename T1, typename T2, typename R, typename P1, typename P2, typename P3, typename P4, typename P5>
+ inline Slot5<R, P1, P2, P3, P4, P5>*
+-slot(T1* &object, R (T2::*function)(P1, P2, P3, P4, P5))
++slot(T1* object, R (T2::*function)(P1, P2, P3, P4, P5))
+ {
+     return new MethodSlot5<T2, R, P1, P2, P3, P4, P5>(object, function);
+ }
+@@ -1005,7 +1005,7 @@
+ 
+ template <typename T1, typename T2, typename R, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6>
+ inline Slot6<R, P1, P2, P3, P4, P5, P6>*
+-slot(T1* &object, R (T2::*function)(P1, P2, P3, P4, P5, P6))
++slot(T1* object, R (T2::*function)(P1, P2, P3, P4, P5, P6))
+ {
+     return new MethodSlot6<T2, R, P1, P2, P3, P4, P5, P6>(object, function);
+ }

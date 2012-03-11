@@ -1,0 +1,22 @@
+--- deluge-torrent-0.5.8.7.orig/libtorrent/src/enum_net.cpp	Thu Mar 27 07:58:06 2008
++++ deluge-torrent-0.5.8.7/libtorrent/src/enum_net.cpp	Thu Mar 27 08:00:47 2008
+@@ -34,6 +34,7 @@
+ #include "asio/ip/host_name.hpp"
+ 
+ #if defined TORRENT_BSD || defined TORRENT_LINUX
++#include <string.h>
+ #include <sys/ioctl.h>
+ #include <sys/socket.h>
+ #include <netinet/in.h>
+@@ -156,9 +157,9 @@
+ 				ret.push_back(iface);
+ 			}
+ 
+-#if defined TORRENT_BSD
++#if defined TORRENT_BSD && defined BSD4_4
+ 			int current_size = item.ifr_addr.sa_len + IFNAMSIZ;
+-#elif defined TORRENT_LINUX
++#elif defined TORRENT_LINUX || defined TORRENT_BSD
+ 			int current_size = sizeof(ifreq);
+ #endif
+ 			ifr += current_size;

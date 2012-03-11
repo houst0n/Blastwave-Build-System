@@ -1,0 +1,20 @@
+Index: trunk/scheduler/ipp.c
+===================================================================
+--- trunk/scheduler/ipp.c	(revision 7332)
++++ trunk/scheduler/ipp.c	(working copy)
+@@ -8589,6 +8589,7 @@
+   * Copy the user's credentials to the new cache file...
+   */
+ 
++#ifndef sun
+   major_status = gss_krb5_copy_ccache(&minor_status, con->gss_delegated_cred,
+ 				      job->ccache);
+ 
+@@ -8600,6 +8601,7 @@
+     job->ccache = NULL;
+     return;
+   }
++#endif
+ 
+  /*
+   * Add the KRB5CCNAME environment variable to the job so that the

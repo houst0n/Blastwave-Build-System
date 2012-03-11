@@ -1,0 +1,20 @@
+--- lxsession-0.4.4/lxsession/xdg-autostart.c-orig	2010-04-27 04:32:08.726948258 -0500
++++ lxsession-0.4.4/lxsession/xdg-autostart.c	2010-04-27 04:32:31.039918120 -0500
+@@ -195,7 +195,7 @@ static void launch_autostart_file( const
+             for( i = 0; i < n; ++i )
+             {
+                 /* Only start this program if we are in the "OnlyShowIn" list */
+-                if( 0 == strcmp( de_name, only_show_in[ i ] ) )
++                if( de_name != NULL && 0 == strcmp( de_name, only_show_in[ i ] ) )
+                     break;
+             }
+             if( i >= n )    /* our session name is not found in the list */
+@@ -216,7 +216,7 @@ static void launch_autostart_file( const
+ 				for( i = 0; i < n; ++i )
+ 				{
+ 					/* Only start this program if we are in the "OnlyShowIn" list */
+-					if( 0 == strcmp( de_name, not_show_in[ i ] ) )
++					if( de_name != NULL && 0 == strcmp( de_name, not_show_in[ i ] ) )
+ 						break;
+ 				}
+ 				if( i < n )    /* our session name is found in the "NotShowIn" list */

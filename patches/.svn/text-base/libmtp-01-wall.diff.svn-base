@@ -1,0 +1,11 @@
+--- libmtp-1.0.1-orig/configure.ac	2009-10-23 01:05:05.664253132 -0400
++++ libmtp-1.0.1/configure.ac	2009-10-23 01:05:57.931168185 -0400
+@@ -94,7 +94,7 @@
+ AC_SYS_LARGEFILE
+ # Stick in "-Werror" if you want to be more aggressive.
+ # (No need to use AC_SUBST on this default substituted environment variable.)
+-CFLAGS="$CFLAGS -Wall -Wmissing-prototypes"
++#CFLAGS="$CFLAGS -Wall -Wmissing-prototypes"
+ 
+ # Output files
+ 

@@ -1,0 +1,42 @@
+--- webkit-1.2.7/WebCore/dom/NodeRenderStyle.h	Fri Feb  5 17:26:57 2010
++++ webkit-1.2.7-patch/WebCore/dom/NodeRenderStyle.h	Sat Mar 19 23:06:11 2011
+@@ -33,7 +33,7 @@
+ 
+ inline RenderStyle* Node::renderStyle() const
+ {
+-    return m_renderer ? m_renderer->style() : nonRendererRenderStyle();
++    return m_renderer ? (RenderStyle*)m_renderer->style() : nonRendererRenderStyle();
+ }
+ 
+ }
+--- webkit-1.2.7/WebCore/loader/DocumentLoader.h	Fri Sep 10 15:20:33 2010
++++ webkit-1.2.7-patch/WebCore/loader/DocumentLoader.h	Sat Mar 19 23:06:11 2011
+@@ -163,7 +163,7 @@
+         String clientRedirectDestinationForHistory() const { return urlForHistory(); }
+         void setClientRedirectSourceForHistory(const String& clientedirectSourceForHistory) { m_clientRedirectSourceForHistory = clientedirectSourceForHistory; }
+         
+-        String serverRedirectSourceForHistory() const { return urlForHistory() == url() ? String() : urlForHistory(); } // null if no server redirect occurred.
++        String serverRedirectSourceForHistory() const { return urlForHistory() == url() ? String() : (String)urlForHistory(); } // null if no server redirect occurred.
+         String serverRedirectDestinationForHistory() const { return url(); }
+ 
+         bool didCreateGlobalHistoryEntry() const { return m_didCreateGlobalHistoryEntry; }
+--- webkit-1.2.7/WebCore/loader/FrameLoader.cpp	Tue Dec 28 13:24:33 2010
++++ webkit-1.2.7-patch/WebCore/loader/FrameLoader.cpp	Sat Mar 19 23:06:11 2011
+@@ -1989,7 +1989,7 @@
+     m_loadType = FrameLoadTypeStandard;
+     RefPtr<DocumentLoader> loader = m_client->createDocumentLoader(request, substituteData);
+     if (lockHistory && m_documentLoader)
+-        loader->setClientRedirectSourceForHistory(m_documentLoader->didCreateGlobalHistoryEntry() ? m_documentLoader->urlForHistory() : m_documentLoader->clientRedirectSourceForHistory());
++        loader->setClientRedirectSourceForHistory(m_documentLoader->didCreateGlobalHistoryEntry() ? (String)m_documentLoader->urlForHistory() : m_documentLoader->clientRedirectSourceForHistory());
+     load(loader.get());
+ }
+ 
+@@ -2013,7 +2013,7 @@
+ {
+     RefPtr<DocumentLoader> loader = m_client->createDocumentLoader(request, SubstituteData());
+     if (lockHistory && m_documentLoader)
+-        loader->setClientRedirectSourceForHistory(m_documentLoader->didCreateGlobalHistoryEntry() ? m_documentLoader->urlForHistory() : m_documentLoader->clientRedirectSourceForHistory());
++        loader->setClientRedirectSourceForHistory(m_documentLoader->didCreateGlobalHistoryEntry() ? (String)m_documentLoader->urlForHistory() : m_documentLoader->clientRedirectSourceForHistory());
+ 
+     loader->setTriggeringAction(action);
+     if (m_documentLoader)

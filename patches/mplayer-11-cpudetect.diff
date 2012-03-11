@@ -1,0 +1,35 @@
+--- MPlayer-1.0rc4/cpudetect.c	2011-01-30 14:05:52.874908169 +0100
++++ MPlayer-1.0rc4-patch/cpudetect.c	2011-01-30 14:06:11.535004688 +0100
+@@ -45,8 +45,11 @@
+ #include <os2.h>
+ #elif defined(__AMIGAOS4__)
+ #include <proto/exec.h>
++#elif defined(__sun)
++#include <sys/utsname.h>
+ #endif
+ 
++
+ /* Thanks to the FreeBSD project for some of this cpuid code, and
+  * help understanding how to use it.  Thanks to the Mesa
+  * team for SSE support detection and more cpu detect code.
+@@ -416,6 +419,20 @@
+     mp_msg(MSGT_CPUDETECT,MSGL_WARN, "Cannot test OS support for SSE, disabling to be safe.\n" );
+     gCpuCaps.hasSSE=0;
+ #endif /* _POSIX_SOURCE */
++#elif defined(__sun)
++   struct utsname solname;
++   long major, minor = 0;
++   char *radix;
++
++   if (uname(&solname) > 0) {
++      major = strtol(solname.release, &radix, 10);
++      if (*radix != '\0')
++         minor = strtol(++radix, NULL, 10);
++      if (!(major >= 5 && minor >= 9))
++         gCpuCaps.hasSSE=0;
++   } else {
++      gCpuCaps.hasSSE=0;
++   }
+ #else
+     /* Do nothing on other platforms for now.
+      */

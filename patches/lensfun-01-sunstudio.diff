@@ -1,0 +1,16 @@
+--- lensfun-0.2.5/include/lensfun/lensfun.h	2010-03-15 10:10:01.000000000 +0100
++++ lensfun-0.2.5-patch/include/lensfun/lensfun.h	2011-03-01 21:48:19.003809241 +0100
+@@ -1895,7 +1895,7 @@
+     /* Prevent user from creating and destroying such objects */
+     lfModifier () {}
+     ~lfModifier () {}
+-#elif defined _MSC_VER
++#elif defined(_MSC_VER) || defined(__sun)
+     /* Sucks, like always */
+     void *dummy;
+ #endif
+--- lensfun-0.2.5/build/tibs/compiler/gcc.mak	Wed Mar 24 23:40:12 2010
++++ lensfun-0.2.5-patch/build/tibs/compiler/gcc.mak	Sat Oct 29 23:24:17 2011
+@@ -6,1 +6,1 @@
+-GCC.CFLAGS = -pipe -Wall \
++GCC.CFLAGS = \

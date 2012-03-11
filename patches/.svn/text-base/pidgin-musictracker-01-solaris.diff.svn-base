@@ -1,0 +1,67 @@
+--- pidgin-musictracker-0.4.16/src/Makefile.am.old	2009-03-07 11:50:40.570421185 +0200
++++ pidgin-musictracker-0.4.16/src/Makefile.am	2009-03-07 11:51:43.859862568 +0200
+@@ -42,8 +42,7 @@
+ AM_CPPFLAGS = \
+         -DDATADIR=\"$(PIDGIN_DATADIR)\" \
+ 	-DLOCALEDIR=\"$(localedir)\" \
+-	$(WERROR_CFLAGS) -W -Wall -Wno-unused-parameter \
+-	-std=gnu99 \
++	$(WERROR_CFLAGS) \
+         $(PIDGIN_CFLAGS) \
+         $(GLIB_CFLAGS) \
+ 		$(GTK_CFLAGS) \
+--- pidgin-musictracker-0.4.16/src/Makefile.in.old	2009-03-07 11:51:57.973830553 +0200
++++ pidgin-musictracker-0.4.16/src/Makefile.in	2009-03-07 11:52:42.076543323 +0200
+@@ -267,8 +267,7 @@
+ AM_CPPFLAGS = \
+         -DDATADIR=\"$(PIDGIN_DATADIR)\" \
+ 	-DLOCALEDIR=\"$(localedir)\" \
+-	$(WERROR_CFLAGS) -W -Wall -Wno-unused-parameter \
+-	-std=gnu99 \
++	$(WERROR_CFLAGS)
+         $(PIDGIN_CFLAGS) \
+         $(GLIB_CFLAGS) \
+ 		$(GTK_CFLAGS) \
+--- pidgin-musictracker-0.4.16/src/musictracker.c.old	2009-03-07 11:53:02.791621799 +0200
++++ pidgin-musictracker-0.4.16/src/musictracker.c	2009-03-07 11:53:51.786585501 +0200
+@@ -214,8 +214,13 @@
+ 	buf[10] = 0;
+ 	status = put_field(status, 'b', buf);
+ 
+-        // Music symbol: U+266B 'beamed eighth notes'
+-	status = put_field(status, 'm', "\u266b");
++        char symbol[4];
++        symbol[0] = 0xE2;
++        symbol[1] = 0x99;
++        symbol[2] = 0xAB;
++        symbol[3] = 0;
++
++	status = put_field(status, 'm', symbol);
+ 
+ 	trace("Formatted status: %s", status);
+ 
+--- pidgin-musictracker-0.4.16/src/xmmsctrl.c.old	2009-03-07 11:54:10.758787842 +0200
++++ pidgin-musictracker-0.4.16/src/xmmsctrl.c	2009-03-07 11:55:38.619789241 +0200
+@@ -76,9 +76,9 @@
+ 			}
+ 
+                         char regexp[100];
+-                        sprintf(regexp, "^(.*)\\%s(.*)\\%s(.*)$", sep, sep);
++                        sprintf(regexp, "^(.*)\\%s(.*)$", sep);
+                         pcre *re = regex(regexp, 0);
+-                        capture(re, title, strlen(title), ti->artist, ti->album, ti->track);
++                        capture(re, title, strlen(title), ti->artist, ti->track);
+                         pcre_free(re);
+ 		}
+ 
+--- pidgin-musictracker-0.4.16/src/utils.h.old	2009-03-07 12:16:06.309532150 +0200
++++ pidgin-musictracker-0.4.16/src/utils.h	2009-03-07 12:16:11.625132535 +0200
+@@ -2,7 +2,7 @@
+ #define _UTILS_H_
+ 
+ #include <stdio.h>
+-#include <pcre.h>
++#include <pcre/pcre.h>
+ 
+ #ifndef WIN32
+ #include <dbus/dbus-glib.h>

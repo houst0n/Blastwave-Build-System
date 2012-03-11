@@ -1,0 +1,33 @@
+--- libnjb-2.2.5/Makefile.orig	2008-01-02 21:31:53.589629000 +0530
++++ libnjb-2.2.5/Makefile	2008-01-02 21:37:10.562176000 +0530
+@@ -97,7 +97,7 @@
+ AWK = gawk
+ CC = /opt/SUNWspro/bin/cc
+ CCDEPMODE = depmode=none
+-CFLAGS = -g -Wall -Wmissing-prototypes
++CFLAGS = -g
+ COMPILE_MINGW32_FALSE = 
+ COMPILE_MINGW32_TRUE = #
+ CPP = /opt/SUNWspro/bin/cc -E
+--- libnjb-2.2.5/src/Makefile.orig	2008-01-02 21:31:53.591230000 +0530
++++ libnjb-2.2.5/src/Makefile	2008-01-02 21:37:25.458424000 +0530
+@@ -96,7 +96,7 @@
+ AWK = gawk
+ CC = /opt/SUNWspro/bin/cc
+ CCDEPMODE = depmode=none
+-CFLAGS = -g -Wall -Wmissing-prototypes
++CFLAGS = -g
+ COMPILE_MINGW32_FALSE = 
+ COMPILE_MINGW32_TRUE = #
+ CPP = /opt/SUNWspro/bin/cc -E
+--- libnjb-2.2.5/sample/Makefile.orig	2008-01-02 21:31:53.590567000 +0530
++++ libnjb-2.2.5/sample/Makefile	2008-01-02 21:37:18.250438000 +0530
+@@ -188,7 +188,7 @@
+ AWK = gawk
+ CC = /opt/SUNWspro/bin/cc
+ CCDEPMODE = depmode=none
+-CFLAGS = -g -Wall -Wmissing-prototypes
++CFLAGS = -g
+ COMPILE_MINGW32_FALSE = 
+ COMPILE_MINGW32_TRUE = #
+ CPP = /opt/SUNWspro/bin/cc -E
