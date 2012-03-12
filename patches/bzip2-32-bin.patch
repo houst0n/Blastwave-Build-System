@@ -1,0 +1,23 @@
+--- bzip2-1.0.6/i386/bzip2-1.0.6-old/Makefile	2010-09-10 23:46:02.000000000 +0100
++++ bzip2-1.0.6/i386/bzip2-1.0.6/Makefile	2012-03-12 17:15:54.805370198 +0000
+@@ -15,16 +15,16 @@
+ SHELL=/bin/sh
+ 
+ # To assist in cross-compiling
+-CC=gcc
++CC=cc
+ AR=ar
+ RANLIB=ranlib
+ LDFLAGS=
+ 
+ BIGFILES=-D_FILE_OFFSET_BITS=64
+-CFLAGS=-Wall -Winline -O2 -g $(BIGFILES)
++CFLAGS=-O2 -g $(BIGFILES)
+ 
+ # Where you want it installed when you do 'make install'
+-PREFIX=/usr/local
++PREFIX=/opt/blast
+ 
+ 
+ OBJS= blocksort.o  \
+
